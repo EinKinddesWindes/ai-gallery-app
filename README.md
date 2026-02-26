@@ -1,18 +1,78 @@
-# React + Vite
+# AI Multimedia Gallery Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive React web application for presenting AI-generated illustrations and multimedia storytelling projects.
 
-Currently, two official plugins are available:
+This project demonstrates my skills in React development, component-based architecture, state management, and deployment.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Live Demo
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+👉 https://einkinddeswindes.github.io/ai-gallery-app
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## 💡 Project Overview
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This application showcases illustrations from my published children's books and multimedia projects.
+
+Users can:
+
+- browse illustrations
+- filter by book category
+- search content dynamically
+- view images in a modal window
+- explore project information
+
+The project focuses on structured frontend development and clean UI implementation.
+
+---
+
+## ✨ Features
+
+- React component architecture
+- Image gallery with filtering and search
+- Modal image preview
+- Responsive layout
+- Clean UI design
+- Deployment with GitHub Pages
+
+---
+
+## 🛠 Tech Stack
+
+- React
+- JavaScript (ES6+)
+- HTML5 / CSS3
+- Vite
+- Git / GitHub
+- GitHub Pages Deployment
+
+---
+
+## 📚 Content Source
+
+The illustrations are based on my published children's books:
+
+- Adilia
+- Ein Kind des Windes
+- Knödel Prinzessin
+
+---
+
+## 🎯 What I Learned
+
+- Building a structured React project
+- Component-based UI design
+- State management and filtering logic
+- Deployment workflow with GitHub Pages
+- Project organization and version control
+
+---
+
+## 👩‍💻 Author
+
+Clara Rück-Kang
+
+GitHub: https://github.com/EinKinddesWindes
+YouTube: https://www.youtube.com/@Clarasgeschenk
