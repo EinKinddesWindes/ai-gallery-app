@@ -5,7 +5,7 @@ export const images = [
     book: "Adilia",
     title: "Adilia – Szene 1",
     description: "Ausgewählte Illustration (Beispiel).",
-    src: "/images/adilia-01.jpg",
+    src: "/ai-gallery-app/images/adilia-01.jpg",
     tools: ["Midjourney", "InDesign"],
     links: {
       amazon: "https://amzn.eu/d/0g9argRH",
@@ -17,7 +17,7 @@ export const images = [
     book: "Ein Kind des Windes",
     title: "Ein Kind des Windes – Szene 1",
     description: "Ausgewählte Illustration (Beispiel).",
-    src: "/images/wind-01.jpg",
+    src: "/ai-gallery-app/images/wind-01.jpg",
     tools: ["Midjourney", "Deevid", "CapCut"],
     links: {
       amazon: "https://amzn.eu/d/0bOONEfQ",
@@ -29,7 +29,7 @@ export const images = [
     book: "Knödel Prinzessin",
     title: "Knödel Prinzessin – Szene 1",
     description: "Ausgewählte Illustration (Beispiel).",
-    src: "/images/knoedel-01.jpg",
+    src: "/ai-gallery-app/images/knoedel-01.jpg",
     tools: ["Midjourney", "Procreate", "InDesign"],
     links: {
       amazon: "https://amzn.eu/d/08RmwFE3",
