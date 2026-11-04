@@ -8,6 +8,7 @@ import About from "./pages/About";
 
 import Gallery from "./components/Gallery";
 import Modal from "./components/Modal";
+import Contact from "./components/Contact";
 
 const BOOKS = ["Alle", "Adilia", "Ein Kind des Windes", "Knödel Prinzessin"];
 
@@ -58,6 +59,7 @@ export default function App() {
 
       <Books />
       <About />
+      <Contact />
 
       <Modal item={selected} onClose={() => setSelected(null)} />
     </div>
