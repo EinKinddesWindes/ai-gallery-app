@@ -69,9 +69,9 @@ export default function App() {
           display: "flex",
           flexWrap: "nowrap",
           justifyContent: "space-between",
-          gap: 24,
+          gap: 20,
           overflowX: "auto",
-          padding: "20px 0",
+          padding: "20px 40px",
           borderBottom: "1px solid #ddd",
           marginBottom: 0,
         }}
@@ -105,6 +105,15 @@ export default function App() {
           </span>
         </div>
 
+        
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 24,
+          }}
+        >
+
         {MENU.map((item) => (
           <button
             key={item.id}
@@ -122,9 +131,11 @@ export default function App() {
               padding: "8px 0",
             }}
           >
+        
             {item.label}
           </button>
         ))}
+        </div>
       </nav>
 
       {page === "startseite" && <Home />}
