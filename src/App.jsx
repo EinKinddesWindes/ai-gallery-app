@@ -161,13 +161,37 @@ export default function App() {
 </h1>
 
 
-          <div
-            style={{
-              display: "flex",
-              gap: 10,
-              flexWrap: "wrap",
-              marginBottom: 16,
-            }}
+         
+<div
+  style={{
+    maxWidth: 1200,
+    margin: "0 auto 28px",
+    padding: "0 32px",
+    boxSizing: "border-box",
+  }}
+>
+  <h1
+    style={{
+      fontSize: 28,
+      fontWeight: 600,
+      color: "#344e41",
+      margin: "0 0 8px",
+    }}
+  >
+    Bücher
+  </h1>
+
+  <p
+    style={{
+      fontSize: 15,
+      color: "#777",
+      margin: 0,
+    }}
+  >
+    Geschichten und Illustrationen für Kinder
+  </p>
+</div>
+
           >
             {BOOKS.map((b) => (
               <button
