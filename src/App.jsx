@@ -71,7 +71,9 @@ export default function App() {
           justifyContent: "space-between",
           gap: 20,
           overflowX: "auto",
-          padding: "20px 40px",
+         
+          padding: "20px max(40px, calc((100% - 1150px) / 2))",
+
           borderBottom: "1px solid #ddd",
           marginBottom: 0,
         }}
