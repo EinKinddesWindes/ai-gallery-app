@@ -190,7 +190,15 @@ export default function App() {
   </p>
 </div>
 
-          >
+  <div
+  style={{
+    display: "flex",
+    gap: 10,
+    flexWrap: "wrap",
+    marginBottom: 16,
+    padding: "0 32px",
+  }}
+>
             {BOOKS.map((b) => (
               <button
                 key={b}
