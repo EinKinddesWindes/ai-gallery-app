@@ -141,7 +141,7 @@ export default function Home() {
     boxSizing: "border-box",
     padding: "20px",
     borderRadius: "50%",
-    background: "rgba(255, 224, 125, 0.92)",
+    background: "rgba(255, 250, 220, 0.88)",
     color: "#254735",
     fontSize: "clamp(13px, 1.4vw, 18px)",
     fontWeight: 600,
