@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 const BASE = import.meta.env.BASE_URL;
 
-
 const slides = [
   {
     type: "intro",
@@ -14,21 +13,23 @@ const slides = [
     title: "Adilia",
     caption: "Auf der Suche nach Mama …",
     image: `${BASE}images/adilia-01.jpg`,
+    position: { left: "6%", top: "18%" },
   },
   {
     type: "image",
     title: "Ein Kind des Windes",
     caption: "Lasst uns die Farben der Natur entdecken!",
     image: `${BASE}images/wind-01.jpg`,
+    position: { right: "6%", bottom: "18%" },
   },
   {
     type: "image",
     title: "Knödel Prinzessin",
     caption: "Lasst uns gemeinsam mit Kartoffeln kochen!",
     image: `${BASE}images/knoedel-01.jpg`,
+    position: { left: "6%", bottom: "18%" },
   },
 ];
-
 
 export default function Home() {
   const [current, setCurrent] = useState(0);
@@ -44,9 +45,9 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [paused]);
 
-  const goTo = (index) => {
+  function goTo(index) {
     setCurrent((index + slides.length) % slides.length);
-  };
+  }
 
   return (
     <section
@@ -54,11 +55,10 @@ export default function Home() {
         position: "relative",
         height: "calc(100dvh - 100px)",
         minHeight: 400,
-
         borderRadius: 0,
         overflow: "hidden",
         background: "#e8efe9",
-        marginBottom: 40,
+        marginBottom: 0,
       }}
     >
       {slides.map((slide, index) => (
@@ -73,7 +73,6 @@ export default function Home() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            flexDirection: "column",
             textAlign: "center",
             background:
               slide.type === "intro"
@@ -135,23 +134,20 @@ export default function Home() {
               <div
                 style={{
                   position: "absolute",
-                  inset: 0,
-                  background:
-                    "linear-gradient(transparent 40%, rgba(0,0,0,0.55))",
-                }}
-              />
-
-              <h2
-                style={{
-                  position: "absolute",
-                  bottom: 85,
-                  color: "white",
-                  fontSize: "clamp(26px, 4vw, 44px)",
-                  textShadow: "0 2px 8px rgba(0,0,0,0.4)",
+                  ...slide.position,
+                  maxWidth: "min(75%, 380px)",
+                  padding: "18px 24px",
+                  borderRadius: 24,
+                  background: "rgba(255,255,255,0.88)",
+                  color: "#344e41",
+                  fontSize: "clamp(17px, 2.5vw, 26px)",
+                  fontWeight: 600,
+                  lineHeight: 1.5,
+                  boxShadow: "0 8px 30px rgba(0,0,0,0.15)",
                 }}
               >
-                {slide.title}
-              </h2>
+                {slide.caption}
+              </div>
             </>
           )}
         </div>
@@ -170,7 +166,10 @@ export default function Home() {
           zIndex: 2,
         }}
       >
-        <button onClick={() => goTo(current - 1)} aria-label="Vorheriges Bild">
+        <button
+          onClick={() => goTo(current - 1)}
+          aria-label="Vorheriges Bild"
+        >
           ❮
         </button>
 
@@ -185,20 +184,25 @@ export default function Home() {
               padding: 0,
               borderRadius: "50%",
               border: "1px solid #777",
-              background: current === index ? "#344e41" : "#ffffff",
+              background:
+                current === index ? "#344e41" : "#ffffff",
               cursor: "pointer",
             }}
           />
         ))}
 
-        <button onClick={() => goTo(current + 1)} aria-label="Nächstes Bild">
+        <button
+          onClick={() => goTo(current + 1)}
+          aria-label="Nächstes Bild"
+        >
           ❯
         </button>
 
         <button
           onClick={() => setPaused((prev) => !prev)}
-          aria-label={paused ? "Wiedergabe starten" : "Wiedergabe pausieren"}
-          style={{ cursor: "pointer" }}
+          aria-label={
+            paused ? "Wiedergabe starten" : "Wiedergabe pausieren"
+          }
         >
           {paused ? "▶" : "Ⅱ"}
         </button>
