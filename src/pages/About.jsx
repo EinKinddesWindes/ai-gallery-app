@@ -5,7 +5,7 @@ export default function About() {
   const imageStyle = {
     width: "100%",
     maxWidth: "550px",
-    height: "auto",
+    height: "430px",
     display: "block",
     objectFit: "contain",
     margin: "0 auto",
