@@ -131,23 +131,31 @@ export default function Home() {
                 }}
               />
 
-              <div
-                style={{
-                  position: "absolute",
-                  ...slide.position,
-                  maxWidth: "min(75%, 380px)",
-                  padding: "18px 24px",
-                  borderRadius: 24,
-                  background: "rgba(255,255,255,0.88)",
-                  color: "#344e41",
-                  fontSize: "clamp(17px, 2.5vw, 26px)",
-                  fontWeight: 600,
-                  lineHeight: 1.5,
-                  boxShadow: "0 8px 30px rgba(0,0,0,0.15)",
-                }}
-              >
-                {slide.caption}
-              </div>
+             
+<div
+  style={{
+    position: "absolute",
+    ...slide.position,
+    width: "clamp(145px, 17vw, 220px)",
+    aspectRatio: "1 / 1",
+    boxSizing: "border-box",
+    padding: "20px",
+    borderRadius: "50%",
+    background: "rgba(255, 224, 125, 0.92)",
+    color: "#254735",
+    fontSize: "clamp(13px, 1.4vw, 18px)",
+    fontWeight: 600,
+    lineHeight: 1.45,
+    boxShadow: "0 5px 18px rgba(0,0,0,0.12)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+  }}
+>
+  {slide.caption}
+</div>
+
             </>
           )}
         </div>
