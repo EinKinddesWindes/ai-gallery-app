@@ -52,14 +52,15 @@ export default function App() {
   }
 
   return (
-    <div
-      style={{
-        maxWidth: 1100,
-        margin: "0 auto",
-        padding: 16,
-        fontFamily: "system-ui, sans-serif",
-      }}
-    >
+  <div
+    style={{
+    width: "100%",
+    minHeight: "100vh",
+    margin: 0,
+    padding: 0,
+    fontFamily: "system-ui, sans-serif",
+  }}
+>
       <nav
         style={{
           display: "flex",
