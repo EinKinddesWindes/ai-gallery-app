@@ -198,7 +198,7 @@ export default function App() {
             query={query}
             onSelect={setSelected}
           />
-          <Books />
+        
         </>
       )}
 
