@@ -76,6 +76,35 @@ export default function App() {
           marginBottom: 0,
         }}
       >
+        
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            whiteSpace: "nowrap",
+          }}
+        >
+          <span
+            style={{
+              fontSize: 20,
+              fontWeight: 700,
+              color: "#214d3b",
+            }}
+          >
+            Clara Kang
+          </span>
+        
+          <span
+            style={{
+              fontSize: 12,
+              color: "#777",
+            }}
+          >
+            | Author & Researcher
+          </span>
+        </div>
+
         {MENU.map((item) => (
           <button
             key={item.id}
