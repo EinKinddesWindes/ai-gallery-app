@@ -70,7 +70,7 @@ export default function App() {
           overflowX: "auto",
           padding: "20px 0",
           borderBottom: "1px solid #ddd",
-          marginBottom: 24,
+          marginBottom: 0,
         }}
       >
         {MENU.map((item) => (
