@@ -47,7 +47,9 @@ export default function Home() {
     <section
       style={{
         position: "relative",
-        height: "clamp(420px, 65vh, 650px)",
+        height: "calc(100dvh - 100px)",
+        minHeight: 400,
+
         borderRadius: 0,
         overflow: "hidden",
         background: "#e8efe9",
