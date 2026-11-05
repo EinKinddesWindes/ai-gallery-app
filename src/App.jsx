@@ -3,9 +3,7 @@ import { useState } from "react";
 import { images } from "./data/images";
 
 import Home from "./pages/Home";
-import Books from "./pages/Books";
 import About from "./pages/About";
-
 import Gallery from "./components/Gallery";
 import Modal from "./components/Modal";
 import Contact from "./components/Contact";
@@ -18,10 +16,8 @@ const BOOKS = [
   "Wenn ein Stern fällt",
 ];
 
-
 const MENU = [
   { id: "startseite", label: "Startseite" },
-
   { id: "buecher", label: "Bücher" },
   { id: "projekte", label: "Projekte" },
   { id: "forschung", label: "Forschung" },
@@ -30,8 +26,7 @@ const MENU = [
   { id: "kontakt", label: "Kontakt" },
 ];
 
-
-const BASE = "/ai-gallery-app/";
+const BASE = import.meta.env.BASE_URL;
 
 function getPage() {
   const hash = window.location.hash.replace("#/", "");
@@ -47,51 +42,34 @@ export default function App() {
   const [selected, setSelected] = useState(null);
 
   function navigate(id) {
-    window.history.pushState(
-      {},
-      "",
-      BASE + "#/" + id
-    );
+    window.history.pushState({}, "", BASE + "#/" + id);
     setPage(id);
     setSelected(null);
     window.scrollTo(0, 0);
   }
 
   return (
-  <div
-    style={{
-    width: "100%",
-    minHeight: "100vh",
-    margin: 0,
-    padding: 0,
-    fontFamily: "system-ui, sans-serif",
-  }}
->
-<div
-  style={{
-    display: "flex",
-    gap: 10,
-    flexWrap: "wrap",
-    marginBottom: 16,
-    padding: "0 32px",
-  }}
->
-
+    <div
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        margin: 0,
+        padding: 0,
+        fontFamily: "system-ui, sans-serif",
+      }}
+    >
       <nav
         style={{
           display: "flex",
           flexWrap: "nowrap",
           justifyContent: "center",
+          alignItems: "center",
           gap: 70,
           overflowX: "auto",
-         
           padding: "20px max(40px, calc((100% - 1150px) / 2))",
-
           borderBottom: "1px solid #ddd",
-          marginBottom: 0,
         }}
       >
-        
         <div
           style={{
             display: "flex",
@@ -109,18 +87,11 @@ export default function App() {
           >
             Clara Kang
           </span>
-        
-          <span
-            style={{
-              fontSize: 12,
-              color: "#777",
-            }}
-          >
+          <span style={{ fontSize: 12, color: "#777" }}>
             | Author & Researcher
           </span>
         </div>
 
-        
         <div
           style={{
             display: "flex",
@@ -128,111 +99,103 @@ export default function App() {
             gap: 24,
           }}
         >
-
-        {MENU.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => navigate(item.id)}
-            style={{
-              border: "none",
-              background: "transparent",
-              color:
-                page === item.id ? "#214d3b" : "#555",
-              fontWeight:
-                page === item.id ? "bold" : "normal",
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-              fontSize: 15,
-              padding: "8px 0",
-            }}
-          >
-        
-            {item.label}
-          </button>
-        ))}
+          {MENU.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => navigate(item.id)}
+              style={{
+                border: "none",
+                background: "transparent",
+                color: page === item.id ? "#214d3b" : "#555",
+                fontWeight:
+                  page === item.id ? "bold" : "normal",
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+                fontSize: 15,
+                padding: "8px 0",
+              }}
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
       </nav>
 
       {page === "startseite" && <Home />}
 
       {page === "buecher" && (
-        <>
-          
+        <section
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "36px 32px 60px",
+            boxSizing: "border-box",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: 20,
+              marginBottom: 18,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 10,
+              }}
+            >
+              {BOOKS.map((b) => (
+                <button
+                  key={b}
+                  onClick={() => setFilter(b)}
+                  style={{
+                    padding: "9px 14px",
+                    borderRadius: 999,
+                    border: "1px solid #ddd",
+                    background:
+                      filter === b ? "#214d3b" : "white",
+                    color:
+                      filter === b ? "white" : "#333",
+                    cursor: "pointer",
+                    fontSize: 14,
+                  }}
+                >
+                  {b}
+                </button>
+              ))}
+            </div>
 
-         
-<div
-  style={{
-    maxWidth: 1200,
-    margin: "0 auto 28px",
-    padding: "0 32px",
-    boxSizing: "border-box",
-  }}
->
-  <h1
-    style={{
-      fontSize: 28,
-      fontWeight: 600,
-      color: "#344e41",
-      margin: "0 0 8px",
-    }}
-  >
-    Bücher
-  </h1>
-
-  <p
-    style={{
-      fontSize: 15,
-      color: "#777",
-      margin: 0,
-    }}
-  >
-    Geschichten und Illustrationen für Kinder
-  </p>
-</div>
-
-  <div
-  style={{
-    display: "flex",
-    gap: 10,
-    flexWrap: "wrap",
-    marginBottom: 16,
-    padding: "0 32px",
-  }}
->
-            {BOOKS.map((b) => (
-              <button
-                key={b}
-                onClick={() => setFilter(b)}
-                style={{
-                  padding: "8px 12px",
-                  borderRadius: 999,
-                  border: "1px solid #ddd",
-                  background:
-                    filter === b ? "#214d3b" : "white",
-                  color:
-                    filter === b ? "white" : "#111",
-                  cursor: "pointer",
-                }}
-              >
-                {b}
-              </button>
-            ))}
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Suche..."
+              aria-label="Bücher suchen"
+              style={{
+                padding: "10px 12px",
+                borderRadius: 0,
+                border: "1px solid #ddd",
+                width: 180,
+                maxWidth: "100%",
+                boxSizing: "border-box",
+              }}
+            />
           </div>
 
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Suche (Titel, Buch, Beschreibung)..."
+          <p
             style={{
-              padding: "10px 12px",
-              borderRadius: 12,
-              border: "1px solid #ddd",
-              width: "100%",
-              maxWidth: 400,
-              marginBottom: 20,
-              boxSizing: "border-box",
+              fontSize: 14,
+              color: "#777",
+              margin: "0 0 28px",
             }}
-          />
+          >
+            Buchcover anklicken – mehr erfahren &amp; Links
+            zu Amazon und YouTube entdecken.
+          </p>
 
           <Gallery
             items={images}
@@ -240,30 +203,21 @@ export default function App() {
             query={query}
             onSelect={setSelected}
           />
-        
-        </>
-      )}
-
-      {page === "bezugsquellen" && (
-          <section
-            style={{
-              padding: "40px 32px",
-              boxSizing: "border-box",
-            }}
-          >
-
-          <h1>Bezugsquellen</h1>
-          <p>
-            Hier finden Sie Informationen darüber,
-            wo meine Bücher erhältlich sind.
-          </p>
-          <Books />
         </section>
       )}
 
-      
+      {page === "projekte" && (
+        <section style={{ padding: "60px 32px" }}>
+          <h1>Projekte</h1>
+          <p>
+            Hier stelle ich meine kreativen und digitalen
+            Projekte vor.
+          </p>
+        </section>
+      )}
+
       {page === "forschung" && (
-        <section style={{ padding: "60px 24px", textAlign: "center" }}>
+        <section style={{ padding: "60px 32px" }}>
           <h1>Forschung</h1>
           <h2>KI-gestütztes Storytelling und Kinderliteratur</h2>
           <p>
@@ -273,6 +227,17 @@ export default function App() {
         </section>
       )}
 
+      {page === "aktuelles" && (
+        <section style={{ padding: "60px 32px" }}>
+          <h1>Aktuelles</h1>
+          <p>
+            Neuigkeiten zu Büchern, Projekten und
+            Veranstaltungen.
+          </p>
+        </section>
+      )}
+
+      {page === "ueber-mich" && <About />}
 
       {page === "kontakt" && <Contact />}
 
@@ -280,7 +245,6 @@ export default function App() {
         item={selected}
         onClose={() => setSelected(null)}
       />
-      </div>
     </div>
   );
 }
