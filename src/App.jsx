@@ -66,7 +66,7 @@ export default function App() {
     padding: 0,
     fontFamily: "system-ui, sans-serif",
   }}
-
+>
 <div
   style={{
     display: "flex",
