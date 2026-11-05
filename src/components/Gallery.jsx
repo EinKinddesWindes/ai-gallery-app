@@ -15,13 +15,19 @@ export default function Gallery({ items, filter, query, onSelect }) {
 
   return (
     <div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-          gap: 14,
-        }}
-      >
+      
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+        gap: 24,
+        maxWidth: 1200,
+        margin: "0 auto",
+        padding: "0 32px",
+        boxSizing: "border-box",
+      }}
+    >
+
         {filtered.map((item) => (
           <ImageCard key={item.id} item={item} onClick={() => onSelect(item)} />
         ))}
