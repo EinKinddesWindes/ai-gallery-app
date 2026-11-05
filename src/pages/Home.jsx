@@ -48,7 +48,7 @@ export default function Home() {
       style={{
         position: "relative",
         height: "clamp(420px, 65vh, 650px)",
-        borderRadius: 24,
+        borderRadius: 0,
         overflow: "hidden",
         background: "#e8efe9",
         marginBottom: 40,
