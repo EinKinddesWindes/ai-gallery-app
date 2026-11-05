@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const BASE = import.meta.env.BASE_URL;
 
+
 const slides = [
   {
     type: "intro",
@@ -11,19 +12,23 @@ const slides = [
   {
     type: "image",
     title: "Adilia",
+    caption: "Auf der Suche nach Mama …",
     image: `${BASE}images/adilia-01.jpg`,
   },
   {
     type: "image",
     title: "Ein Kind des Windes",
+    caption: "Lasst uns die Farben der Natur entdecken!",
     image: `${BASE}images/wind-01.jpg`,
   },
   {
     type: "image",
     title: "Knödel Prinzessin",
+    caption: "Lasst uns gemeinsam mit Kartoffeln kochen!",
     image: `${BASE}images/knoedel-01.jpg`,
   },
 ];
+
 
 export default function Home() {
   const [current, setCurrent] = useState(0);
