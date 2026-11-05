@@ -17,13 +17,16 @@ const BOOKS = [
   "Knödel Prinzessin",
 ];
 
+
 const MENU = [
   { id: "startseite", label: "Startseite" },
-  { id: "buecher", label: "Bücher" },
-  { id: "bezugsquellen", label: "Bezugsquellen" },
+  { id: "buecher", label: "Bücher & Projekte" },
+  { id: "forschung", label: "Forschung" },
+  { id: "aktuelles", label: "Aktuelles" },
   { id: "ueber-mich", label: "Über mich" },
   { id: "kontakt", label: "Kontakt" },
 ];
+
 
 const BASE = "/ai-gallery-app/";
 
