@@ -43,7 +43,7 @@ export default function Modal({ item, onClose }) {
           aria-label="Schließen"
           style={{
             position: "sticky",
-            top: 7,
+            top: 10,
             float: "right",
             margin: 10,
             zIndex: 3,
@@ -71,7 +71,7 @@ export default function Modal({ item, onClose }) {
 
         <div
           style={{
-            padding: "24px 28px",
+            padding: "10px 24px 28px",
             textAlign: "center",
           }}
         >
@@ -79,7 +79,7 @@ export default function Modal({ item, onClose }) {
             style={{
               color: "#344e41",
               margin: "0 0 8px",
-              fontSize: 23,
+              fontSize: 26,
             }}
           >
             {item.title}
@@ -101,7 +101,7 @@ export default function Modal({ item, onClose }) {
             style={{
               display: "flex",
               justifyContent: "center",
-              gap: 10,
+              gap: 12,
               flexWrap: "wrap",
             }}
           >
