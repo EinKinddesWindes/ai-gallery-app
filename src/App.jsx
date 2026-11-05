@@ -280,6 +280,7 @@ export default function App() {
         item={selected}
         onClose={() => setSelected(null)}
       />
+      </div>
     </div>
   );
 }
