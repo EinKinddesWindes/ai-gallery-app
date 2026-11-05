@@ -148,18 +148,6 @@ export default function App() {
       {page === "buecher" && (
         <>
           
-<h1
-  style={{
-    fontSize: 28,
-    fontWeight: 600,
-    color: "#344e41",
-    margin: "0 0 28px 0",
-    paddingLeft: 32,
-  }}
->
-  Bücher und Illustrationen
-</h1>
-
 
          
 <div
