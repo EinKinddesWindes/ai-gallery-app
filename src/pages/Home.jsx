@@ -13,21 +13,21 @@ const slides = [
     title: "Adilia",
     caption: "Auf der Suche nach Mama …",
     image: `${BASE}images/adilia-01.jpg`,
-    position: { left: "6%", top: "18%" },
+    position: { right: "6%", top: "18%" },
   },
   {
     type: "image",
     title: "Ein Kind des Windes",
     caption: "Lasst uns die Farben der Natur entdecken!",
     image: `${BASE}images/wind-01.jpg`,
-    position: { right: "6%", bottom: "18%" },
+    position: { left: "6%", bottom: "18%" },
   },
   {
     type: "image",
     title: "Knödel Prinzessin",
     caption: "Lasst uns gemeinsam mit Kartoffeln kochen!",
     image: `${BASE}images/knoedel-01.jpg`,
-    position: { left: "6%", bottom: "18%" },
+    position: { right: "6%", bottom: "18%" },
   },
 ];
 
@@ -57,7 +57,7 @@ export default function Home() {
         minHeight: 400,
         borderRadius: 0,
         overflow: "hidden",
-        background: "#e8efe9",
+        background: "#06B6D4",
         marginBottom: 0,
       }}
     >
