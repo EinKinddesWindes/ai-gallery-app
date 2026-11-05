@@ -1,5 +1,16 @@
+
 export default function Modal({ item, onClose }) {
   if (!item) return null;
+
+  const linkStyle = {
+    display: "inline-block",
+    padding: "10px 16px",
+    background: "#344e41",
+    color: "white",
+    textDecoration: "none",
+    fontSize: 14,
+    fontWeight: 500,
+  };
 
   return (
     <div
@@ -7,72 +18,114 @@ export default function Modal({ item, onClose }) {
       style={{
         position: "fixed",
         inset: 0,
-        background: "rgba(0,0,0,0.6)",
-        display: "grid",
-        placeItems: "center",
-        padding: 16,
+        background: "rgba(0,0,0,0.7)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 20,
         zIndex: 50,
       }}
     >
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: "white",
-          borderRadius: 16,
-          maxWidth: 900,
+          position: "relative",
           width: "100%",
-          overflow: "hidden",
+          maxWidth: 850,
+          maxHeight: "90vh",
+          overflowY: "auto",
+          background: "white",
+          borderRadius: 0,
         }}
       >
-        <div style={{ display: "flex", justifyContent: "space-between", padding: 16 }}>
-          <div>
-            <div style={{ fontWeight: 800, fontSize: 18 }}>{item.title}</div>
-            <div style={{ opacity: 0.7 }}>{item.book}</div>
-          </div>
-          <button onClick={onClose} style={{ fontSize: 16, padding: "6px 10px" }}>
-            ✕
-          </button>
-        </div>
+        <button
+          onClick={onClose}
+          aria-label="Schließen"
+          style={{
+            position: "sticky",
+            top: 10,
+            float: "right",
+            margin: 10,
+            zIndex: 3,
+            border: "none",
+            background: "#344e41",
+            color: "white",
+            padding: "8px 12px",
+            cursor: "pointer",
+          }}
+        >
+          ✕
+        </button>
 
-        <div style={{ background: "#f6f6f6" }}>
-          <img
-            src={item.src}
-            alt={item.title}
-            style={{ width: "100%", height: "auto", display: "block" }}
-            loading="lazy"
-          />
-        </div>
+        <img
+          src={item.src}
+          alt={item.title}
+          style={{
+            width: "100%",
+            maxHeight: "55vh",
+            objectFit: "contain",
+            display: "block",
+            background: "#f5f5f1",
+          }}
+        />
 
-        <div style={{ padding: 16, display: "grid", gap: 10 }}>
-          <div>{item.description}</div>
+        <div
+          style={{
+            padding: "24px 28px",
+            textAlign: "center",
+          }}
+        >
+          <h2
+            style={{
+              color: "#344e41",
+              margin: "0 0 8px",
+              fontSize: 26,
+            }}
+          >
+            {item.title}
+          </h2>
 
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {item.tools?.map((t) => (
-              <span
-                key={t}
-                style={{
-                  fontSize: 12,
-                  padding: "4px 8px",
-                  borderRadius: 999,
-                  background: "#efefef",
-                }}
+          {item.year && (
+            <p style={{ color: "#777", margin: "0 0 20px" }}>
+              Veröffentlichung: {item.year}
+            </p>
+          )}
+
+          {!item.year && (
+            <p style={{ color: "#777", margin: "0 0 20px" }}>
+              Veröffentlichung in Vorbereitung
+            </p>
+          )}
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 12,
+              flexWrap: "wrap",
+            }}
+          >
+            {item.links?.amazon && (
+              <a
+                href={item.links.amazon}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={linkStyle}
               >
-                {t}
-              </span>
-            ))}
-          </div>
+                Auf Amazon ansehen
+              </a>
+            )}
 
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <a href={item.links?.amazon} target="_blank" rel="noreferrer">
-              Auf Amazon ansehen →
-            </a>
-            <a href={item.links?.youtube} target="_blank" rel="noreferrer">
-              YouTube →
-            </a>
-          </div>
-
-          <div style={{ fontSize: 12, opacity: 0.75 }}>
-            Hinweis: Aus urheberrechtlichen Gründen werden nur ausgewählte Illustrationen gezeigt.
+            {item.links?.youtube && (
+              <a
+                href={item.links.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={linkStyle}
+              >
+                Video auf YouTube
+              </a>
+            )}
           </div>
         </div>
       </div>
