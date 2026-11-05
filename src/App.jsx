@@ -203,7 +203,13 @@ export default function App() {
       )}
 
       {page === "bezugsquellen" && (
-        <section>
+          <section
+            style={{
+              padding: "40px 32px",
+              boxSizing: "border-box",
+            }}
+          >
+
           <h1>Bezugsquellen</h1>
           <p>
             Hier finden Sie Informationen darüber,
