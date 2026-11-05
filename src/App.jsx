@@ -168,7 +168,18 @@ export default function App() {
         </section>
       )}
 
-      {page === "ueber-mich" && <About />}
+      
+      {page === "forschung" && (
+        <section style={{ padding: "60px 24px", textAlign: "center" }}>
+          <h1>Forschung</h1>
+          <h2>KI-gestütztes Storytelling und Kinderliteratur</h2>
+          <p>
+            Hier stelle ich meine Forschungsinteressen und
+            mein geplantes Promotionsvorhaben vor.
+          </p>
+        </section>
+      )}
+
 
       {page === "kontakt" && <Contact />}
 
