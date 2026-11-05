@@ -101,7 +101,7 @@ export default function Modal({ item, onClose }) {
             style={{
               display: "flex",
               justifyContent: "center",
-              gap: 12,
+              gap: 10,
               flexWrap: "wrap",
             }}
           >
