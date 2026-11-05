@@ -68,7 +68,7 @@ export default function App() {
         style={{
           display: "flex",
           flexWrap: "nowrap",
-          justifyContent: "center",
+          justifyContent: "space-between",
           gap: 24,
           overflowX: "auto",
           padding: "20px 0",
