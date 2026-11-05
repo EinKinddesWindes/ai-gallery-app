@@ -8,14 +8,6 @@ import Gallery from "./components/Gallery";
 import Modal from "./components/Modal";
 import Contact from "./components/Contact";
 
-const BOOKS = [
-  "Alle",
-  "Adilia",
-  "Ein Kind des Windes",
-  "Knödel Prinzessin",
-  "Wenn ein Stern fällt",
-];
-
 const MENU = [
   { id: "startseite", label: "Startseite" },
   { id: "buecher", label: "Bücher" },
@@ -27,6 +19,7 @@ const MENU = [
 ];
 
 const BASE = import.meta.env.BASE_URL;
+const PAGE_SIZE = 12;
 
 function getPage() {
   const hash = window.location.hash.replace("#/", "");
@@ -37,8 +30,9 @@ function getPage() {
 
 export default function App() {
   const [page, setPage] = useState(getPage);
-  const [filter, setFilter] = useState("Alle");
+  const [status, setStatus] = useState("Alle");
   const [query, setQuery] = useState("");
+  const [bookPage, setBookPage] = useState(1);
   const [selected, setSelected] = useState(null);
 
   function navigate(id) {
@@ -47,6 +41,56 @@ export default function App() {
     setSelected(null);
     window.scrollTo(0, 0);
   }
+
+  function changeStatus(value) {
+    setStatus(value);
+    setBookPage(1);
+  }
+
+  function changeQuery(value) {
+    setQuery(value);
+    setBookPage(1);
+  }
+
+  const filteredBooks = images.filter((item) => {
+    const matchesSearch = [
+      item.title,
+      item.book,
+      item.description,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase()
+      .includes(query.toLowerCase());
+
+    const matchesStatus =
+      status === "Alle" ||
+      (status === "Veröffentlicht" && Boolean(item.year)) ||
+      (status === "In Vorbereitung" && !item.year);
+
+    return matchesSearch && matchesStatus;
+  });
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredBooks.length / PAGE_SIZE)
+  );
+
+  const visibleBooks = filteredBooks.slice(
+    (bookPage - 1) * PAGE_SIZE,
+    bookPage * PAGE_SIZE
+  );
+
+  const navButtonStyle = (id) => ({
+    border: "none",
+    background: "transparent",
+    color: page === id ? "#214d3b" : "#555",
+    fontWeight: page === id ? "bold" : "normal",
+    cursor: "pointer",
+    whiteSpace: "nowrap",
+    fontSize: 15,
+    padding: "8px 0",
+  });
 
   return (
     <div
@@ -66,7 +110,8 @@ export default function App() {
           alignItems: "center",
           gap: 70,
           overflowX: "auto",
-          padding: "20px max(40px, calc((100% - 1150px) / 2))",
+          padding:
+            "20px max(40px, calc((100% - 1150px) / 2))",
           borderBottom: "1px solid #ddd",
         }}
       >
@@ -88,7 +133,7 @@ export default function App() {
             Clara Kang
           </span>
           <span style={{ fontSize: 12, color: "#777" }}>
-            | Author & Researcher
+            | Author &amp; Researcher
           </span>
         </div>
 
@@ -103,17 +148,7 @@ export default function App() {
             <button
               key={item.id}
               onClick={() => navigate(item.id)}
-              style={{
-                border: "none",
-                background: "transparent",
-                color: page === item.id ? "#214d3b" : "#555",
-                fontWeight:
-                  page === item.id ? "bold" : "normal",
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-                fontSize: 15,
-                padding: "8px 0",
-              }}
+              style={navButtonStyle(item.id)}
             >
               {item.label}
             </button>
@@ -135,56 +170,52 @@ export default function App() {
           <div
             style={{
               display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
               flexWrap: "wrap",
-              gap: 20,
-              marginBottom: 18,
+              gap: 12,
+              marginBottom: 20,
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 10,
-              }}
-            >
-              {BOOKS.map((b) => (
-                <button
-                  key={b}
-                  onClick={() => setFilter(b)}
-                  style={{
-                    padding: "9px 14px",
-                    borderRadius: 999,
-                    border: "1px solid #ddd",
-                    background:
-                      filter === b ? "#214d3b" : "white",
-                    color:
-                      filter === b ? "white" : "#333",
-                    cursor: "pointer",
-                    fontSize: 14,
-                  }}
-                >
-                  {b}
-                </button>
-              ))}
-            </div>
-
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Suche..."
-              aria-label="Bücher suchen"
-              style={{
-                padding: "10px 12px",
-                borderRadius: 0,
-                border: "1px solid #ddd",
-                width: 180,
-                maxWidth: "100%",
-                boxSizing: "border-box",
-              }}
-            />
+            {[
+              "Alle",
+              "Veröffentlicht",
+              "In Vorbereitung",
+            ].map((value) => (
+              <button
+                key={value}
+                onClick={() => changeStatus(value)}
+                style={{
+                  padding: "10px 18px",
+                  border: "1px solid #ddd",
+                  borderRadius: 0,
+                  background:
+                    status === value ? "#214d3b" : "white",
+                  color:
+                    status === value ? "white" : "#333",
+                  cursor: "pointer",
+                  fontSize: 14,
+                }}
+              >
+                {value}
+              </button>
+            ))}
           </div>
+
+          <input
+            value={query}
+            onChange={(e) => changeQuery(e.target.value)}
+            placeholder="Buchtitel suchen ..."
+            aria-label="Bücher suchen"
+            style={{
+              display: "block",
+              width: "100%",
+              padding: "14px 16px",
+              border: "1px solid #ddd",
+              borderRadius: 0,
+              fontSize: 14,
+              boxSizing: "border-box",
+              marginBottom: 18,
+            }}
+          />
 
           <p
             style={{
@@ -193,16 +224,73 @@ export default function App() {
               margin: "0 0 28px",
             }}
           >
-            Buchcover anklicken – mehr erfahren &amp; Links
+            Buchcover anklicken – mehr erfahren und Links
             zu Amazon und YouTube entdecken.
           </p>
 
           <Gallery
-            items={images}
-            filter={filter}
-            query={query}
+            items={visibleBooks}
+            filter="Alle"
+            query=""
             onSelect={setSelected}
           />
+
+          {totalPages > 1 && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: 12,
+                marginTop: 40,
+              }}
+            >
+              <button
+                disabled={bookPage === 1}
+                onClick={() =>
+                  setBookPage((p) => Math.max(1, p - 1))
+                }
+              >
+                ←
+              </button>
+
+              {Array.from(
+                { length: totalPages },
+                (_, i) => i + 1
+              ).map((number) => (
+                <button
+                  key={number}
+                  onClick={() => setBookPage(number)}
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    fontWeight:
+                      bookPage === number ? 700 : 400,
+                    color:
+                      bookPage === number
+                        ? "#214d3b"
+                        : "#777",
+                    cursor: "pointer",
+                    padding: 8,
+                  }}
+                >
+                  {number}
+                </button>
+              ))}
+
+              <button
+                disabled={bookPage === totalPages}
+                onClick={() =>
+                  setBookPage((p) =>
+                    Math.min(totalPages, p + 1)
+                  )
+                }
+              >
+                →
+              </button>
+            </div>
+          )}
         </section>
       )}
 
@@ -219,7 +307,9 @@ export default function App() {
       {page === "forschung" && (
         <section style={{ padding: "60px 32px" }}>
           <h1>Forschung</h1>
-          <h2>KI-gestütztes Storytelling und Kinderliteratur</h2>
+          <h2>
+            KI-gestütztes Storytelling und Kinderliteratur
+          </h2>
           <p>
             Hier stelle ich meine Forschungsinteressen und
             mein geplantes Promotionsvorhaben vor.
