@@ -66,7 +66,17 @@ export default function App() {
     padding: 0,
     fontFamily: "system-ui, sans-serif",
   }}
+
+<div
+  style={{
+    display: "flex",
+    gap: 10,
+    flexWrap: "wrap",
+    marginBottom: 16,
+    padding: "0 32px",
+  }}
 >
+
       <nav
         style={{
           display: "flex",
