@@ -5,7 +5,6 @@ export default function About() {
   const imageStyle = {
     width: "100%",
     maxWidth: "550px",
-    maxHeight: "380px",
     height: "auto",
     display: "block",
     objectFit: "contain",
@@ -144,7 +143,7 @@ export default function About() {
           style={imageStyle}
         />
         <figcaption style={captionStyle}>
-          Meine Bücher im Rahmen einer Buchausstellung
+          Meine Kinderbücher auf der Frankfurter Buchmesse 2025
         </figcaption>
       </figure>
 
