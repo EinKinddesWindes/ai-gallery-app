@@ -1,66 +1,201 @@
 
+import { useEffect, useState } from "react";
+
+const BASE = import.meta.env.BASE_URL;
+
+const slides = [
+  {
+    type: "intro",
+    title: "Clara Kang",
+  },
+  {
+    type: "image",
+    title: "Adilia",
+    image: `${BASE}images/adilia-01.jpg`,
+  },
+  {
+    type: "image",
+    title: "Ein Kind des Windes",
+    image: `${BASE}images/wind-01.jpg`,
+  },
+  {
+    type: "image",
+    title: "Knödel Prinzessin",
+    image: `${BASE}images/knoedel-01.jpg`,
+  },
+];
+
 export default function Home() {
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [paused]);
+
+  const goTo = (index) => {
+    setCurrent((index + slides.length) % slides.length);
+  };
+
   return (
     <section
       style={{
-        background: "linear-gradient(135deg, #f7f2e9, #e8efe9)",
+        position: "relative",
+        height: "clamp(420px, 65vh, 650px)",
         borderRadius: 24,
-        padding: "60px 32px",
+        overflow: "hidden",
+        background: "#e8efe9",
         marginBottom: 40,
-        textAlign: "center",
       }}
     >
-      <p style={{
-        color: "#7b6a54",
-        letterSpacing: 3,
-        fontSize: 13,
-        fontWeight: 600,
-      }}>
-        CREATIVE PORTFOLIO
-      </p>
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          style={{
+            position: "absolute",
+            inset: 0,
+            opacity: current === index ? 1 : 0,
+            transition: "opacity 1.2s ease-in-out",
+            pointerEvents: current === index ? "auto" : "none",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            textAlign: "center",
+            background:
+              slide.type === "intro"
+                ? "linear-gradient(135deg, #f7f2e9, #e8efe9)"
+                : "#24362e",
+          }}
+        >
+          {slide.type === "intro" ? (
+            <div style={{ padding: "30px 24px" }}>
+              <p
+                style={{
+                  color: "#7b6a54",
+                  letterSpacing: 3,
+                  fontSize: 13,
+                  fontWeight: 600,
+                }}
+              >
+                CREATIVE & RESEARCH PORTFOLIO
+              </p>
 
-      <h1 style={{
-        fontSize: "clamp(36px, 6vw, 64px)",
-        color: "#303d35",
-        margin: "20px 0",
-      }}>
-        Clara Kang
-      </h1>
+              <h1
+                style={{
+                  fontSize: "clamp(36px, 6vw, 64px)",
+                  color: "#303d35",
+                  margin: "20px 0",
+                }}
+              >
+                Clara Kang
+              </h1>
 
-      <h2 style={{
-        fontSize: "clamp(20px, 3vw, 30px)",
-        fontWeight: 400,
-        color: "#53675a",
-      }}>
-        Where Stories Meet Technology
-      </h2>
+              <h2
+                style={{
+                  fontSize: "clamp(20px, 3vw, 30px)",
+                  fontWeight: 400,
+                  color: "#53675a",
+                }}
+              >
+                Where Stories Meet Technology
+              </h2>
 
-      <p style={{
-        maxWidth: 650,
-        margin: "24px auto",
-        lineHeight: 1.8,
-        color: "#555",
-      }}>
-        Children's Literature · Creative Writing · Generative AI
-        <br />
-        Web & App Development · Digital Media
-      </p>
+              <p style={{ color: "#555", lineHeight: 1.8 }}>
+                Children's Literature · Creative Writing · Generative AI
+                <br />
+                Web & App Development · Digital Media
+              </p>
+            </div>
+          ) : (
+            <>
+              <img
+                src={slide.image}
+                alt={slide.title}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
 
-      <a
-        href="#gallery"
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(transparent 40%, rgba(0,0,0,0.55))",
+                }}
+              />
+
+              <h2
+                style={{
+                  position: "absolute",
+                  bottom: 85,
+                  color: "white",
+                  fontSize: "clamp(26px, 4vw, 44px)",
+                  textShadow: "0 2px 8px rgba(0,0,0,0.4)",
+                }}
+              >
+                {slide.title}
+              </h2>
+            </>
+          )}
+        </div>
+      ))}
+
+      <div
         style={{
-          display: "inline-block",
-          marginTop: 20,
-          padding: "14px 30px",
-          background: "#344e41",
-          color: "white",
-          borderRadius: 30,
-          textDecoration: "none",
-          fontWeight: 600,
+          position: "absolute",
+          bottom: 18,
+          left: 0,
+          right: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 12,
+          zIndex: 2,
         }}
       >
-        Explore My Work
-      </a>
+        <button onClick={() => goTo(current - 1)} aria-label="Vorheriges Bild">
+          ❮
+        </button>
+
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goTo(index)}
+            aria-label={`Bild ${index + 1}`}
+            style={{
+              width: 11,
+              height: 11,
+              padding: 0,
+              borderRadius: "50%",
+              border: "1px solid #777",
+              background: current === index ? "#344e41" : "#ffffff",
+              cursor: "pointer",
+            }}
+          />
+        ))}
+
+        <button onClick={() => goTo(current + 1)} aria-label="Nächstes Bild">
+          ❯
+        </button>
+
+        <button
+          onClick={() => setPaused((prev) => !prev)}
+          aria-label={paused ? "Wiedergabe starten" : "Wiedergabe pausieren"}
+          style={{ cursor: "pointer" }}
+        >
+          {paused ? "▶" : "Ⅱ"}
+        </button>
+      </div>
     </section>
   );
 }
