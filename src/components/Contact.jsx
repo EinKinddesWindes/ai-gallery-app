@@ -33,7 +33,7 @@ export default function Contact() {
   return (
     <section id="contact" style={{
       maxWidth: 650,
-      margin: "70px auto",
+      margin: "50px auto",
       padding: 30,
       background: "#f8f5f0",
       borderRadius: 20
