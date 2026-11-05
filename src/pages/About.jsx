@@ -4,9 +4,12 @@ export default function About() {
 
   const imageStyle = {
     width: "100%",
+    maxWidth: "550px",
+    maxHeight: "380px",
     height: "auto",
     display: "block",
     objectFit: "contain",
+    margin: "0 auto",
   };
 
   const paragraphStyle = {
@@ -14,6 +17,14 @@ export default function About() {
     lineHeight: 2,
     color: "#444",
     marginBottom: "28px",
+  };
+
+  const captionStyle = {
+    fontSize: "13px",
+    color: "#888",
+    textAlign: "center",
+    marginTop: "14px",
+    fontFamily: "Arial, sans-serif",
   };
 
   return (
@@ -45,7 +56,7 @@ export default function About() {
             margin: "20px 0",
           }}
         >
-          Über mich
+          Über die Autorin
         </h1>
 
         <p
@@ -85,21 +96,13 @@ export default function About() {
         </p>
       </section>
 
-      <figure style={{ margin: "65px 0" }}>
+      <figure style={{ margin: "40px 0" }}>
         <img
           src={`${BASE}images/Adilia_5.png`}
           alt="Illustration aus der Bilderbuchwelt von Adilia"
           style={imageStyle}
         />
-        <figcaption
-          style={{
-            fontSize: "13px",
-            color: "#888",
-            textAlign: "center",
-            marginTop: "14px",
-            fontFamily: "Arial, sans-serif",
-          }}
-        >
+        <figcaption style={captionStyle}>
           Eine Bilderbuchwelt voller Fantasie
         </figcaption>
       </figure>
@@ -134,21 +137,13 @@ export default function About() {
         </p>
       </section>
 
-      <figure style={{ margin: "65px 0" }}>
+      <figure style={{ margin: "40px 0" }}>
         <img
           src={`${BASE}images/FrankfurtMesse.jpg`}
           alt="Kinderbücher auf einem Bücherregal bei einer Buchausstellung"
           style={imageStyle}
         />
-        <figcaption
-          style={{
-            fontSize: "13px",
-            color: "#888",
-            textAlign: "center",
-            marginTop: "14px",
-            fontFamily: "Arial, sans-serif",
-          }}
-        >
+        <figcaption style={captionStyle}>
           Meine Bücher im Rahmen einer Buchausstellung
         </figcaption>
       </figure>
