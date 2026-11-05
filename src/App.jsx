@@ -15,6 +15,7 @@ const BOOKS = [
   "Adilia",
   "Ein Kind des Windes",
   "Knödel Prinzessin",
+  "Wenn ein Stern fällt",
 ];
 
 
