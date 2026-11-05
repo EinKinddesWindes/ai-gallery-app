@@ -20,7 +20,9 @@ const BOOKS = [
 
 const MENU = [
   { id: "startseite", label: "Startseite" },
-  { id: "buecher", label: "Bücher & Projekte" },
+
+  { id: "buecher", label: "Bücher" },
+  { id: "projekte", label: "Projekte" },
   { id: "forschung", label: "Forschung" },
   { id: "aktuelles", label: "Aktuelles" },
   { id: "ueber-mich", label: "Über mich" },
