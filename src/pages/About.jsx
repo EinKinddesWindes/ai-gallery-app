@@ -39,7 +39,7 @@ export default function About() {
       style={{
         maxWidth: "900px",
         margin: "0 auto",
-        padding: "80px 28px 120px",
+        padding: "60px 28px 120px",
         fontFamily: "Georgia, serif",
       }}
     >
@@ -144,8 +144,8 @@ export default function About() {
 
         <p style={paragraphStyle}>
           Zu meinen veröffentlichten Arbeiten gehören
-          <em> Adilia</em>, <em>Ein Kind des Windes</em> und
-          <em> Knödel Prinzessin</em>. Jedes dieser Bücher
+          <em> Adilia</em>, <em>Ein Kind des Windes</em>, 
+          <em> Knödel Prinzessin</em> und <em> Wenn ein Stern fällt</em>. Jedes dieser Bücher
           ist Teil meiner kreativen Auseinandersetzung
           mit Fantasie, Sprache und visueller Gestaltung.
         </p>
