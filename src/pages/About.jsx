@@ -5,7 +5,8 @@ export default function About() {
   const imageStyle = {
     width: "100%",
     maxWidth: "550px",
-    height: "430px",
+    maxHeight: "380px",
+    height: "auto",
     display: "block",
     objectFit: "contain",
     margin: "0 auto",
@@ -24,6 +25,13 @@ export default function About() {
     textAlign: "center",
     marginTop: "14px",
     fontFamily: "Arial, sans-serif",
+  };
+
+  const headingStyle = {
+    fontSize: "clamp(24px, 3vw, 30px)",
+    fontWeight: 400,
+    color: "#244b3c",
+    margin: "48px 0 24px",
   };
 
   return (
@@ -55,7 +63,7 @@ export default function About() {
             margin: "20px 0",
           }}
         >
-          Über die Autorin
+          Über mich
         </h1>
 
         <p
@@ -72,26 +80,41 @@ export default function About() {
       </header>
 
       <section>
+        <h2 style={headingStyle}>
+          Zwischen Geschichten, Kreativität und Technologie
+        </h2>
+
         <p style={paragraphStyle}>
-          Meine Begeisterung für Geschichten beginnt
-          mit der Welt der Kinder. Schon früh
-          interessiert mich, wie Kinder ihre Umgebung
-          wahrnehmen, wie sie Bilder verstehen und
-          wie aus einfachen Worten ganze Welten
-          entstehen können.
+          Geschichten begleiten mich schon seit vielen
+          Jahren. Meine berufliche und kreative Entwicklung
+          begann in Korea, wo ich zunächst Literatur
+          studierte und mich später intensiv mit der
+          Kinderliteratur beschäftigte. Schon früh
+          interessierte mich die Frage, wie Geschichten
+          entstehen, welche Bedeutung sie für Kinder
+          haben und wie Worte und Bilder gemeinsam eine
+          eigene Welt erschaffen können.
         </p>
 
         <p style={paragraphStyle}>
-          In Korea studiere ich Kinderliteratur und
-          beschäftige mich intensiv mit der Bedeutung
-          von Geschichten für die kindliche Entwicklung.
-          Nach meinem Studium arbeite ich mehrere Jahre
-          mit Kindern in Grundschulen und Kindergärten.
-          Diese Begegnungen prägen meine Vorstellung
-          davon, was eine gute Kindergeschichte
-          ausmacht: Sie soll neugierig machen,
-          Fantasie wecken und Raum für eigene
-          Gedanken lassen.
+          Nach meinem Literaturstudium arbeitete ich
+          mehrere Jahre an Schulen und in Kindergärten.
+          Diese Zeit ermöglichte es mir, die Welt der
+          Kinder aus nächster Nähe kennenzulernen.
+          Ihre Fantasie, ihre Fragen und ihre besondere
+          Art, die Wirklichkeit wahrzunehmen, haben
+          mein Interesse an Geschichten für junge
+          Leserinnen und Leser nachhaltig geprägt.
+        </p>
+
+        <p style={paragraphStyle}>
+          Zwischen 2008 und 2012 vertiefte ich dieses
+          Interesse durch ein Masterstudium der
+          Kinderliteratur an der Sookmyung Women's
+          University in Seoul. Dabei beschäftigte
+          ich mich mit der literarischen Gestaltung
+          von Geschichten und der Bedeutung von
+          Kinderbüchern.
         </p>
       </section>
 
@@ -107,39 +130,40 @@ export default function About() {
       </figure>
 
       <section>
+        <h2 style={headingStyle}>
+          Geschichten werden zu Büchern
+        </h2>
+
         <p style={paragraphStyle}>
-          Mit der Zeit wird aus meiner Begeisterung
-          für Kinderliteratur der Wunsch, eigene
-          Geschichten zu erzählen. Ich beginne,
-          Bilderbücher zu schreiben und die Figuren
-          und Welten meiner Geschichten gestalterisch
-          zu entwickeln.
+          Neben meiner beruflichen und akademischen
+          Entwicklung begann ich, eigene Geschichten
+          zu schreiben und zu illustrieren. Aus Ideen
+          wurden Figuren, aus Figuren entstanden Bilder
+          und schließlich Bücher.
         </p>
 
         <p style={paragraphStyle}>
-          Auch nach meinem Weg nach Deutschland
-          bleibt die Kinderliteratur ein wichtiger
-          Teil meines Lebens. Als selbstständige
-          Kinderbuchautorin veröffentliche ich
-          mehrere Bücher. Jede Veröffentlichung
-          bedeutet für mich mehr als ein fertiges
-          Werk: Sie ist das Ergebnis vieler Ideen,
-          Entwürfe, Entscheidungen und neuer Fragen.
+          Zu meinen veröffentlichten Arbeiten gehören
+          <em> Adilia</em>, <em>Ein Kind des Windes</em> und
+          <em> Knödel Prinzessin</em>. Jedes dieser Bücher
+          ist Teil meiner kreativen Auseinandersetzung
+          mit Fantasie, Sprache und visueller Gestaltung.
         </p>
 
         <p style={paragraphStyle}>
-          Besonders schön ist es, wenn die Geschichten
-          ihren Weg aus meinem Arbeitszimmer in die
-          Welt finden – zu Leserinnen und Lesern,
-          in Bücherregale und zu Menschen, die
-          sich von ihnen berühren lassen.
+          Mit der Zeit erweiterte sich meine Arbeit
+          über das gedruckte Buch hinaus. Digitale
+          Illustrationen, Videos und multimediale
+          Erzählformen eröffneten mir neue Möglichkeiten,
+          Geschichten zu gestalten und einem größeren
+          Publikum zugänglich zu machen.
         </p>
       </section>
 
       <figure style={{ margin: "40px 0" }}>
         <img
           src={`${BASE}images/FrankfurtMesse.jpg`}
-          alt="Kinderbücher auf einem Bücherregal bei einer Buchausstellung"
+          alt="Meine Kinderbücher auf der Frankfurter Buchmesse 2025"
           style={imageStyle}
         />
         <figcaption style={captionStyle}>
@@ -148,39 +172,97 @@ export default function About() {
       </figure>
 
       <section>
+        <h2 style={headingStyle}>
+          Ein neuer Weg in die digitale Welt
+        </h2>
+
         <p style={paragraphStyle}>
-          Neben dem Schreiben wächst mein Interesse
-          an digitalen Medien und neuen Technologien.
-          Ich beschäftige mich mit Webentwicklung
-          und entdecke, wie sich kreative Ideen
-          auch in digitalen Projekten umsetzen lassen.
+          Mein Interesse an Computern reicht bis in
+          meine frühe Ausbildungszeit in Korea zurück,
+          in der ich mich bereits mit Programmierung
+          beschäftigte. Viele Jahre später entschied
+          ich mich, diesen Bereich erneut aufzugreifen
+          und meine Kenntnisse systematisch zu erweitern.
         </p>
 
         <p style={paragraphStyle}>
-          Mit der Entwicklung künstlicher Intelligenz
-          entstehen für mich neue Fragen. Wie verändert
-          KI den kreativen Schreibprozess? Welche
-          Möglichkeiten eröffnet sie Autorinnen und
-          Autoren? Und welche Entscheidungen sollten
-          auch in Zukunft bewusst beim Menschen bleiben?
+          Von März bis Juli 2024 absolvierte ich eine
+          Weiterbildung in Web- und App-Entwicklung
+          an der WBS Coding School. Dort beschäftigte
+          ich mich unter anderem mit HTML, CSS,
+          JavaScript und React.
         </p>
 
         <p style={paragraphStyle}>
-          Heute möchte ich diese Fragen mit meiner
-          Erfahrung als Kinderbuchautorin verbinden.
-          Mein geplantes Forschungsvorhaben beschäftigt
-          sich mit KI-gestütztem Storytelling,
-          Kreativität und der Rolle der Autorin
-          im Entstehungsprozess einer Geschichte.
+          Heute verbinde ich meine Erfahrungen aus
+          Literatur und Gestaltung mit der Entwicklung
+          digitaler Anwendungen. Ein Beispiel dafür
+          ist meine eigene AI Gallery Web App, die ich
+          mit React und Vite entwickle. Sie bietet
+          Raum für Illustrationen, Bücher und
+          kreative Projekte.
+        </p>
+      </section>
+
+      <section>
+        <h2 style={headingStyle}>
+          Wenn Literatur auf künstliche Intelligenz trifft
+        </h2>
+
+        <p style={paragraphStyle}>
+          Seit einigen Jahren beschäftige ich mich
+          zunehmend mit den Möglichkeiten künstlicher
+          Intelligenz im kreativen Prozess. Besonders
+          interessiert mich, wie KI Autorinnen und
+          Autoren beim Entwickeln von Geschichten,
+          beim Gestalten von Bildern und beim
+          Experimentieren mit neuen Erzählformen
+          unterstützen kann.
         </p>
 
         <p style={paragraphStyle}>
-          Dabei steht für mich nicht die Vorstellung
-          im Mittelpunkt, dass Technologie menschliche
-          Fantasie ersetzt. Vielmehr interessiert mich,
-          wie neue Werkzeuge den kreativen Prozess
-          begleiten können, ohne dass die persönliche
-          Stimme einer Autorin verloren geht.
+          Dabei steht für mich nicht die Technologie
+          allein im Mittelpunkt, sondern der Mensch,
+          der sie verwendet. Eine Geschichte braucht
+          eine eigene Perspektive, bewusste Entscheidungen
+          und eine persönliche Handschrift.
+        </p>
+
+        <p style={paragraphStyle}>
+          Aus dieser Verbindung zwischen Kinderliteratur,
+          Kreativität und Technologie ist auch mein
+          Interesse an einer vertieften wissenschaftlichen
+          Auseinandersetzung mit KI-gestütztem
+          Storytelling entstanden.
+        </p>
+      </section>
+
+      <section>
+        <h2 style={headingStyle}>
+          Eine Geschichte, die weitergeht
+        </h2>
+
+        <p style={paragraphStyle}>
+          Wenn ich heute auf meinen bisherigen Weg
+          zurückblicke, sehe ich keine voneinander
+          getrennten Tätigkeiten, sondern eine
+          Entwicklung, in der sich unterschiedliche
+          Interessen immer wieder begegnen.
+        </p>
+
+        <p style={paragraphStyle}>
+          Literatur, pädagogische Erfahrung,
+          Illustration, Programmierung und künstliche
+          Intelligenz sind für mich verschiedene
+          Möglichkeiten, Ideen auszudrücken und
+          neue Perspektiven zu entdecken.
+        </p>
+
+        <p style={paragraphStyle}>
+          Ich möchte weiterhin Geschichten erzählen,
+          neue Technologien kennenlernen und
+          herausfinden, welche kreativen Möglichkeiten
+          aus ihrer Verbindung entstehen können.
         </p>
       </section>
 
