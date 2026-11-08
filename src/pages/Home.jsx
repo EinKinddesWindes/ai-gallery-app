@@ -1,22 +1,22 @@
 
-import { useState } from "react";
-
 export default function Home() {
   const BASE = import.meta.env.BASE_URL;
-  const [selected, setSelected] = useState(null);
 
-  const images = [
+  const videos = [
     {
-      src: `${BASE}images/Adilia_5.png`,
+      src: `${BASE}videos/adilia-preview.mp4`,
       title: "Adilia",
+      youtube: "https://www.youtube.com/watch?v=SpLFxYUaMhM",
     },
     {
-      src: `${BASE}images/Adilia_24.png`,
-      title: "Adilia – Bilderwelt",
+      src: `${BASE}videos/prinzessin-preview.mp4`,
+      title: "Knödel Prinzessin",
+      youtube: "https://www.youtube.com/watch?v=TBQKSDscfDk",
     },
     {
-      src: `${BASE}images/FrankfurtMesse.jpg`,
-      title: "Frankfurter Buchmesse 2025",
+      src: `${BASE}videos/wind-preview.mp4`,
+      title: "Ein Kind des Windes",
+      youtube: "https://www.youtube.com/watch?v=l6Pg27NteMo",
     },
   ];
 
@@ -69,15 +69,29 @@ export default function Home() {
           </div>
 
           <div className="clara-art-grid">
-            {images.map((item, index) => (
-              <button
-                key={index}
-                className="clara-art-item"
-                onClick={() => setSelected(item)}
-                aria-label={`${item.title} vergrößern`}
+            {videos.map((item, index) => (
+              <a
+                key={item.title}
+                className={`clara-art-item clara-float-${index + 1}`}
+                href={item.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${item.title} – vollständiges Video ansehen`}
+                title={`${item.title} – Video mit Musik ansehen`}
               >
-                <img src={item.src} alt={item.title} />
-              </button>
+                <video
+                  src={item.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-hidden="true"
+                />
+                <span className="clara-video-label">
+                  {item.title} ↗
+                </span>
+              </a>
             ))}
           </div>
         </div>
@@ -122,28 +136,11 @@ export default function Home() {
         </a>
       </section>
 
-      {selected && (
-        <div
-          className="clara-lightbox"
-          onClick={() => setSelected(null)}
-          role="presentation"
-        >
-          <button
-            className="clara-close"
-            onClick={() => setSelected(null)}
-            aria-label="Schließen"
-          >
-            ×
-          </button>
-          <img
-            src={selected.src}
-            alt={selected.title}
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-
       <style>{`
+        .clara-landing {
+          box-sizing: border-box;
+        }
+
         .clara-landing-grid {
           display: grid;
           grid-template-columns: 1fr 1.15fr;
@@ -214,31 +211,70 @@ export default function Home() {
         }
 
         .clara-art-item {
-          padding: 0;
-          border: 0;
-          background: transparent;
-          cursor: pointer;
-          overflow: hidden;
+          position: relative;
+          display: block;
           height: 310px;
+          overflow: hidden;
+          background: #e8e5dd;
+          text-decoration: none;
+          cursor: pointer;
+          will-change: transform;
         }
 
-        .clara-art-item:nth-child(2) {
-          transform: translateY(-24px);
-        }
-
-        .clara-art-item:nth-child(3) {
-          transform: translateY(24px);
-        }
-
-        .clara-art-item img {
+        .clara-art-item video {
           width: 100%;
           height: 100%;
+          display: block;
           object-fit: cover;
-          transition: transform .5s ease;
+          transition: scale .5s ease;
         }
 
-        .clara-art-item:hover img {
-          transform: scale(1.06);
+        .clara-art-item:hover video {
+          scale: 1.06;
+        }
+
+        .clara-video-label {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 24px 10px 12px;
+          background: linear-gradient(
+            transparent,
+            rgba(0,0,0,.55)
+          );
+          color: white;
+          font-family: Arial, sans-serif;
+          font-size: 12px;
+          text-align: center;
+          pointer-events: none;
+        }
+
+        .clara-float-1 {
+          animation: claraFloat1 7s ease-in-out infinite;
+        }
+
+        .clara-float-2 {
+          animation: claraFloat2 8.5s ease-in-out infinite;
+        }
+
+        .clara-float-3 {
+          animation: claraFloat3 9s ease-in-out infinite;
+        }
+
+        @keyframes claraFloat1 {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-12px); }
+        }
+
+        @keyframes claraFloat2 {
+          0%, 100% { transform: translateY(-24px); }
+          50% { transform: translateY(-42px); }
+        }
+
+        @keyframes claraFloat3 {
+          0%, 100% { transform: translateY(24px); }
+          50% { transform: translateY(7px); }
         }
 
         .clara-feature {
@@ -290,34 +326,6 @@ export default function Home() {
           margin: 20px auto;
         }
 
-        .clara-lightbox {
-          position: fixed;
-          inset: 0;
-          z-index: 9999;
-          background: rgba(0,0,0,.9);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 40px;
-        }
-
-        .clara-lightbox img {
-          max-width: 95%;
-          max-height: 90vh;
-          object-fit: contain;
-        }
-
-        .clara-close {
-          position: absolute;
-          top: 20px;
-          right: 30px;
-          background: none;
-          border: 0;
-          color: white;
-          font-size: 40px;
-          cursor: pointer;
-        }
-
         @media (max-width: 800px) {
           .clara-landing-grid,
           .clara-feature {
@@ -346,10 +354,18 @@ export default function Home() {
           .clara-art-item {
             height: 160px;
           }
+
+          .clara-video-label {
+            font-size: 10px;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .clara-art-item img {
+          .clara-art-item {
+            animation: none;
+          }
+
+          .clara-art-item video {
             transition: none;
           }
         }
