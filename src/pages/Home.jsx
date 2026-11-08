@@ -25,11 +25,11 @@ export default function Home() {
       <section
         className="clara-landing"
         style={{
-          minHeight: "calc(100vh - 90px)",
+          minHeight: "auto",
           display: "flex",
-          alignItems: "center",
+          alignItems: "flexe-start",
           background: "#f7f5f0",
-          padding: "70px 7%",
+          padding: "35px 7% 65px",
         }}
       >
         <div className="clara-landing-grid">
@@ -68,16 +68,12 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="clara-art-grid">
+         
+          <div className="clara-video-grid">
             {videos.map((item, index) => (
-              <a
-                key={item.title}
-                className={`clara-art-item clara-float-${index + 1}`}
-                href={item.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${item.title} – vollständiges Video ansehen`}
-                title={`${item.title} – Video mit Musik ansehen`}
+              <div
+                key={item.src}
+                className={`clara-video-item clara-video-${index + 1}`}
               >
                 <video
                   src={item.src}
@@ -86,14 +82,14 @@ export default function Home() {
                   loop
                   playsInline
                   preload="metadata"
-                  aria-hidden="true"
                 />
-                <span className="clara-video-label">
-                  {item.title} ↗
+                <span className="clara-video-title">
+                  {item.title}
                 </span>
-              </a>
+              </div>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -141,15 +137,25 @@ export default function Home() {
           box-sizing: border-box;
         }
 
+        
         .clara-landing-grid {
           display: grid;
-          grid-template-columns: 1fr 1.15fr;
-          gap: 55px;
-          align-items: center;
+          grid-template-columns: 0.9fr 1.1fr;
+          gap: 45px;
+          align-items: start;
           max-width: 1450px;
           width: 100%;
           margin: auto;
         }
+        
+        .clara-landing-intro h1 {
+          font-size: clamp(36px, 4vw, 60px);
+          font-weight: 400;
+          line-height: 1.12;
+          color: #244b3c;
+          margin: 22px 0;
+        }
+
 
         .clara-eyebrow {
           font-family: Arial, sans-serif;
@@ -203,22 +209,69 @@ export default function Home() {
           color: #244b3c;
         }
 
-        .clara-art-grid {
+                
+        .clara-video-grid {
           display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 12px;
-          align-items: center;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+          width: 100%;
+          align-items: stretch;
         }
-
-        .clara-art-item {
+        
+        .clara-video-item {
           position: relative;
-          display: block;
-          height: 310px;
           overflow: hidden;
-          background: #e8e5dd;
-          text-decoration: none;
-          cursor: pointer;
-          will-change: transform;
+          background: #eaece6;
+          aspect-ratio: 4 / 3;
+        }
+        
+        .clara-video-3 {
+          grid-column: 1 / -1;
+          aspect-ratio: 16 / 7;
+        }
+        
+        .clara-video-item video {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s ease;
+        }
+        
+        .clara-video-item:hover video {
+          transform: scale(1.04);
+        }
+        
+        .clara-video-title {
+          position: absolute;
+          left: 14px;
+          bottom: 14px;
+          color: white;
+          font-family: Arial, sans-serif;
+          font-size: 13px;
+          text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+          pointer-events: none;
+        }
+        
+        @media (max-width: 600px) {
+          .clara-video-grid {
+            grid-template-columns: 1fr;
+          }
+        
+          .clara-video-3 {
+            grid-column: auto;
+          }
+        
+          .clara-video-item,
+          .clara-video-3 {
+            aspect-ratio: 16 / 10;
+          }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+          .clara-video-item video {
+            transition: none;
+          }
         }
 
         .clara-art-item video {
