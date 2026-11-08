@@ -1,220 +1,359 @@
 
-import { useEffect, useState } from "react";
-
-const BASE = import.meta.env.BASE_URL;
-
-const slides = [
-  {
-    type: "intro",
-    title: "Clara Kang",
-  },
-  {
-    type: "image",
-    title: "Adilia",
-    caption: "Auf der Suche nach Mama …",
-    image: `${BASE}images/adilia-01.jpg`,
-    position: { right: "6%", top: "18%" },
-  },
-  {
-    type: "image",
-    title: "Ein Kind des Windes",
-    caption: "Lasst uns die Farben der Natur entdecken!",
-    image: `${BASE}images/wind-01.jpg`,
-    position: { left: "6%", bottom: "18%" },
-  },
-  {
-    type: "image",
-    title: "Knödel Prinzessin",
-    caption: "Lasst uns gemeinsam mit Kartoffeln kochen!",
-    image: `${BASE}images/knoedel-01.jpg`,
-    position: { right: "6%", bottom: "18%" },
-  },
-];
+import { useState } from "react";
 
 export default function Home() {
-  const [current, setCurrent] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const BASE = import.meta.env.BASE_URL;
+  const [selected, setSelected] = useState(null);
 
-  useEffect(() => {
-    if (paused) return;
-
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, [paused]);
-
-  function goTo(index) {
-    setCurrent((index + slides.length) % slides.length);
-  }
+  const images = [
+    {
+      src: `${BASE}images/Adilia_5.png`,
+      title: "Adilia",
+    },
+    {
+      src: `${BASE}images/Adilia_24.png`,
+      title: "Adilia – Bilderwelt",
+    },
+    {
+      src: `${BASE}images/FrankfurtMesse.jpg`,
+      title: "Frankfurter Buchmesse 2025",
+    },
+  ];
 
   return (
-    <section
-      style={{
-        position: "relative",
-        height: "calc(100dvh - 100px)",
-        minHeight: 400,
-        borderRadius: 0,
-        overflow: "hidden",
-        background: "#06B6D4",
-        marginBottom: 0,
-      }}
-    >
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          style={{
-            position: "absolute",
-            inset: 0,
-            opacity: current === index ? 1 : 0,
-            transition: "opacity 1.2s ease-in-out",
-            pointerEvents: current === index ? "auto" : "none",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            background:
-              slide.type === "intro"
-                ? "linear-gradient(135deg, #f7f2e9, #e8efe9)"
-                : "#24362e",
-          }}
-        >
-          {slide.type === "intro" ? (
-            <div style={{ padding: "30px 24px" }}>
-              <p
-                style={{
-                  color: "#7b6a54",
-                  letterSpacing: 3,
-                  fontSize: 13,
-                  fontWeight: 600,
-                }}
-              >
-                CREATIVE & RESEARCH PORTFOLIO
-              </p>
-
-              <h1
-                style={{
-                  fontSize: "clamp(36px, 6vw, 64px)",
-                  color: "#303d35",
-                  margin: "20px 0",
-                }}
-              >
-                Clara Kang
-              </h1>
-
-              <h2
-                style={{
-                  fontSize: "clamp(20px, 3vw, 30px)",
-                  fontWeight: 400,
-                  color: "#53675a",
-                }}
-              >
-                Where Stories Meet Technology
-              </h2>
-
-              <p style={{ color: "#555", lineHeight: 1.8 }}>
-                Children's Literature · Creative Writing · Generative AI
-                <br />
-                Web & App Development · Digital Media
-              </p>
-            </div>
-          ) : (
-            <>
-              <img
-                src={slide.image}
-                alt={slide.title}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-
-             
-<div
-  style={{
-    position: "absolute",
-    ...slide.position,
-    width: "clamp(145px, 17vw, 220px)",
-    aspectRatio: "1 / 1",
-    boxSizing: "border-box",
-    padding: "20px",
-    borderRadius: "50%",
-    background: "rgba(255, 250, 220, 0.88)",
-    color: "#254735",
-    fontSize: "clamp(13px, 1.4vw, 18px)",
-    fontWeight: 600,
-    lineHeight: 1.45,
-    boxShadow: "0 5px 18px rgba(0,0,0,0.12)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-  }}
->
-  {slide.caption}
-</div>
-
-            </>
-          )}
-        </div>
-      ))}
-
-      <div
+    <main style={{ fontFamily: "Georgia, serif" }}>
+      <section
+        className="clara-landing"
         style={{
-          position: "absolute",
-          bottom: 18,
-          left: 0,
-          right: 0,
+          minHeight: "calc(100vh - 90px)",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          gap: 12,
-          zIndex: 2,
+          background: "#f7f5f0",
+          padding: "70px 7%",
         }}
       >
-        <button
-          onClick={() => goTo(current - 1)}
-          aria-label="Vorheriges Bild"
-        >
-          ❮
-        </button>
+        <div className="clara-landing-grid">
+          <div className="clara-landing-intro">
+            <p className="clara-eyebrow">
+              AUTHOR · STORYTELLING · RESEARCH
+            </p>
 
-        {slides.map((_, index) => (
+            <h1>
+              Where Stories
+              <br />
+              Meet Technology
+            </h1>
+
+            <p className="clara-subtitle">
+              Kinderliteratur, Kreativität und
+              künstliche Intelligenz.
+            </p>
+
+            <p className="clara-description">
+              Ich verbinde die Welt der Geschichten
+              mit digitaler Gestaltung und neuen
+              Technologien. Entdecken Sie meine
+              Bücher, Bilderwelten und
+              Forschungsinteressen.
+            </p>
+
+            <div className="clara-actions">
+              <a href="#/projekte" className="clara-primary">
+                Meine Projekte entdecken
+              </a>
+
+              <a href="#/forschung" className="clara-secondary">
+                Forschung entdecken
+              </a>
+            </div>
+          </div>
+
+          <div className="clara-art-grid">
+            {images.map((item, index) => (
+              <button
+                key={index}
+                className="clara-art-item"
+                onClick={() => setSelected(item)}
+                aria-label={`${item.title} vergrößern`}
+              >
+                <img src={item.src} alt={item.title} />
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="clara-feature">
+        <div>
+          <p className="clara-eyebrow">
+            CREATIVE PORTFOLIO
+          </p>
+          <h2>Geschichten in Bildern</h2>
+          <p>
+            Jede Illustration erzählt ihre eigene
+            Geschichte. Zwischen Fantasie, Literatur
+            und digitaler Kunst entstehen neue
+            Bilderwelten.
+          </p>
+          <a href="#/projekte">
+            Bilderwelten entdecken →
+          </a>
+        </div>
+
+        <img
+          src={`${BASE}images/Adilia_5.png`}
+          alt="Illustration aus Adilia"
+        />
+      </section>
+
+      <section className="clara-research">
+        <p className="clara-eyebrow">
+          LITERATURE · CREATIVITY · AI
+        </p>
+        <h2>Wenn Literatur auf KI trifft</h2>
+        <p>
+          Wie kann künstliche Intelligenz den
+          kreativen Schreibprozess unterstützen,
+          ohne die persönliche Stimme einer
+          Autorin zu ersetzen?
+        </p>
+        <a href="#/forschung">
+          Meine Forschungsinteressen →
+        </a>
+      </section>
+
+      {selected && (
+        <div
+          className="clara-lightbox"
+          onClick={() => setSelected(null)}
+          role="presentation"
+        >
           <button
-            key={index}
-            onClick={() => goTo(index)}
-            aria-label={`Bild ${index + 1}`}
-            style={{
-              width: 11,
-              height: 11,
-              padding: 0,
-              borderRadius: "50%",
-              border: "1px solid #777",
-              background:
-                current === index ? "#344e41" : "#ffffff",
-              cursor: "pointer",
-            }}
+            className="clara-close"
+            onClick={() => setSelected(null)}
+            aria-label="Schließen"
+          >
+            ×
+          </button>
+          <img
+            src={selected.src}
+            alt={selected.title}
+            onClick={(e) => e.stopPropagation()}
           />
-        ))}
+        </div>
+      )}
 
-        <button
-          onClick={() => goTo(current + 1)}
-          aria-label="Nächstes Bild"
-        >
-          ❯
-        </button>
+      <style>{`
+        .clara-landing-grid {
+          display: grid;
+          grid-template-columns: 1fr 1.15fr;
+          gap: 55px;
+          align-items: center;
+          max-width: 1450px;
+          width: 100%;
+          margin: auto;
+        }
 
-        <button
-          onClick={() => setPaused((prev) => !prev)}
-          aria-label={
-            paused ? "Wiedergabe starten" : "Wiedergabe pausieren"
+        .clara-eyebrow {
+          font-family: Arial, sans-serif;
+          font-size: 12px;
+          letter-spacing: 3px;
+          color: #827d72;
+        }
+
+        .clara-landing-intro h1 {
+          font-size: clamp(40px, 5vw, 72px);
+          font-weight: 400;
+          line-height: 1.12;
+          color: #244b3c;
+          margin: 25px 0;
+        }
+
+        .clara-subtitle {
+          font-size: 22px;
+          color: #555;
+          line-height: 1.6;
+        }
+
+        .clara-description {
+          font-size: 16px;
+          color: #777;
+          line-height: 1.9;
+          max-width: 480px;
+        }
+
+        .clara-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+          margin-top: 35px;
+          font-family: Arial, sans-serif;
+        }
+
+        .clara-actions a {
+          text-decoration: none;
+          padding: 15px 20px;
+          font-size: 13px;
+        }
+
+        .clara-primary {
+          background: #244b3c;
+          color: white;
+        }
+
+        .clara-secondary {
+          border: 1px solid #244b3c;
+          color: #244b3c;
+        }
+
+        .clara-art-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 12px;
+          align-items: center;
+        }
+
+        .clara-art-item {
+          padding: 0;
+          border: 0;
+          background: transparent;
+          cursor: pointer;
+          overflow: hidden;
+          height: 310px;
+        }
+
+        .clara-art-item:nth-child(2) {
+          transform: translateY(-24px);
+        }
+
+        .clara-art-item:nth-child(3) {
+          transform: translateY(24px);
+        }
+
+        .clara-art-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform .5s ease;
+        }
+
+        .clara-art-item:hover img {
+          transform: scale(1.06);
+        }
+
+        .clara-feature {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 70px;
+          align-items: center;
+          max-width: 1200px;
+          margin: auto;
+          padding: 110px 7%;
+        }
+
+        .clara-feature h2,
+        .clara-research h2 {
+          font-size: clamp(30px, 4vw, 48px);
+          font-weight: 400;
+          color: #244b3c;
+        }
+
+        .clara-feature p,
+        .clara-research p {
+          line-height: 1.9;
+          color: #666;
+        }
+
+        .clara-feature img {
+          width: 100%;
+          max-height: 460px;
+          object-fit: contain;
+        }
+
+        .clara-feature a,
+        .clara-research a {
+          display: inline-block;
+          margin-top: 20px;
+          color: #244b3c;
+          text-decoration: none;
+          font-family: Arial, sans-serif;
+        }
+
+        .clara-research {
+          background: #eaece6;
+          padding: 100px 25px;
+          text-align: center;
+        }
+
+        .clara-research > p {
+          max-width: 650px;
+          margin: 20px auto;
+        }
+
+        .clara-lightbox {
+          position: fixed;
+          inset: 0;
+          z-index: 9999;
+          background: rgba(0,0,0,.9);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 40px;
+        }
+
+        .clara-lightbox img {
+          max-width: 95%;
+          max-height: 90vh;
+          object-fit: contain;
+        }
+
+        .clara-close {
+          position: absolute;
+          top: 20px;
+          right: 30px;
+          background: none;
+          border: 0;
+          color: white;
+          font-size: 40px;
+          cursor: pointer;
+        }
+
+        @media (max-width: 800px) {
+          .clara-landing-grid,
+          .clara-feature {
+            grid-template-columns: 1fr;
           }
-        >
-          {paused ? "▶" : "Ⅱ"}
-        </button>
-      </div>
-    </section>
+
+          .clara-landing {
+            padding: 60px 6% !important;
+          }
+
+          .clara-art-grid {
+            margin-top: 45px;
+          }
+
+          .clara-art-item {
+            height: 220px;
+          }
+
+          .clara-feature {
+            padding: 70px 6%;
+            gap: 30px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .clara-art-item {
+            height: 160px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .clara-art-item img {
+            transition: none;
+          }
+        }
+      `}</style>
+    </main>
   );
 }
