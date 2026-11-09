@@ -1,6 +1,5 @@
 
 import Butterflies from "../components/Butterflies";
-import Footer from "../components/Footer";
 
 export default function Home() {
   const BASE = import.meta.env.BASE_URL;
@@ -365,7 +364,7 @@ export default function Home() {
         }
       `}</style>
 
-      <Footer />
+
     </main>
   );
 }
