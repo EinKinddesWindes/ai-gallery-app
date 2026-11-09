@@ -268,7 +268,7 @@ export default function App() {
     {/* INTRODUCTION */}
     <section
       style={{
-        padding: "90px 7% 100px",
+        padding: "40px 7% 55px",
         maxWidth: "1200px",
         margin: "0 auto",
       }}
@@ -314,7 +314,7 @@ export default function App() {
           lineHeight: 1.9,
           color: "#666",
           maxWidth: "750px",
-          marginTop: "35px",
+          marginTop: "20px",
         }}
       >
         Wie kann künstliche Intelligenz
@@ -328,7 +328,7 @@ export default function App() {
     <section
       style={{
         background: "#eaece6",
-        padding: "90px 7%",
+        padding: "55px 7%",
       }}
     >
       <div
@@ -397,7 +397,7 @@ export default function App() {
     {/* RESEARCH TOPICS */}
     <section
       style={{
-        padding: "100px 7%",
+        padding: "60px 7%",
         maxWidth: "1200px",
         margin: "0 auto",
       }}
@@ -417,7 +417,7 @@ export default function App() {
         style={{
           fontSize: "clamp(28px, 4vw, 44px)",
           fontWeight: 400,
-          marginBottom: "45px",
+          marginBottom: "25px",
         }}
       >
         Themen und Fragestellungen
@@ -497,7 +497,7 @@ export default function App() {
     <section
       style={{
         background: "#eaece6",
-        padding: "85px 7%",
+        padding: "55px 7%",
         textAlign: "center",
       }}
     >
