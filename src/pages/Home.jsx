@@ -30,7 +30,7 @@ export default function Home() {
         style={{
           minHeight: "auto",
           display: "flex",
-          alignItems: "flexe-start",
+          alignItems: "flex-start",
           background: "#f7f5f0",
           padding: "35px 7% 65px",
         }}
@@ -428,7 +428,8 @@ export default function Home() {
       `}</style>
       <Footer/>
     return (
-  <main style={{ fontFamily: "Georgia, serif" }}>
+  <main style={{ fontFamily: "Georgia, serif" }}
     <Butterflies />
+      >
   );
 }
