@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Gallery from "./components/Gallery";
 import Modal from "./components/Modal";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 const BOOKS = [
   "Alle",
@@ -245,6 +246,7 @@ export default function App() {
         item={selected}
         onClose={() => setSelected(null)}
       />
+      <Footer/>
     </div>
   );
 }
