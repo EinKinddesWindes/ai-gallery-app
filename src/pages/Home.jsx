@@ -1,5 +1,4 @@
 
-import Butterflies from "../components/Butterflies";
 
 export default function Home() {
   const BASE = import.meta.env.BASE_URL;
@@ -24,8 +23,7 @@ export default function Home() {
 
   return (
     <main style={{ fontFamily: "Georgia, serif" }}>
-      <Butterflies />
-
+  
       {/* LANDING PAGE */}
       <section
         className="clara-landing"
