@@ -387,10 +387,14 @@ export default function Butterflies({ page = "home" }) {
         const rotation =
           Math.sin(time * 0.0012 + i * 1.9) * 17;
 
+       
+        const followerSizes = [0.55, 0.85, 1.25, 0.65, 1.05];
+        
         const scale =
           item.mode === "follow"
-            ? b.size
+            ? followerSizes[n]
             : b.size * (0.55 + n * 0.06);
+
 
         element.style.transform = `
           translate3d(
