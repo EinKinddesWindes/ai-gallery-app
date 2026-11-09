@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { images } from "./data/images";
 
 import Home from "./pages/Home";
@@ -8,6 +8,7 @@ import Gallery from "./components/Gallery";
 import Modal from "./components/Modal";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import Butterflies from "./components/Butterflies";
 
 const BOOKS = [
   "Alle",
@@ -27,14 +28,23 @@ const MENU = [
   { id: "kontakt", label: "Kontakt" },
 ];
 
-const BASE = import.meta.env.BASE_URL;
-
 function getPage() {
   const hash = window.location.hash.replace("#/", "");
+
   return MENU.some((item) => item.id === hash)
     ? hash
     : "startseite";
 }
+
+const BUTTERFLY_PAGES = {
+  startseite: "home",
+  buecher: "buecher",
+  projekte: "projekte",
+  forschung: "forschung",
+  "ueber-mich": "about",
+  aktuelles: "other",
+  kontakt: "other",
+};
 
 export default function App() {
   const [page, setPage] = useState(getPage);
@@ -42,12 +52,31 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(null);
 
+  // Synchronize page when hash changes
+  useEffect(() => {
+    function handleLocationChange() {
+      setPage(getPage());
+      setSelected(null);
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener("hashchange", handleLocationChange);
+    window.addEventListener("popstate", handleLocationChange);
+
+    return () => {
+      window.removeEventListener("hashchange", handleLocationChange);
+      window.removeEventListener("popstate", handleLocationChange);
+    };
+  }, []);
+
   function navigate(id) {
-    window.history.pushState({}, "", BASE + "#/" + id);
+    window.location.hash = `/${id}`;
     setPage(id);
     setSelected(null);
     window.scrollTo(0, 0);
   }
+
+  const butterflyPage = BUTTERFLY_PAGES[page] || "other";
 
   return (
     <div
@@ -59,6 +88,7 @@ export default function App() {
         fontFamily: "system-ui, sans-serif",
       }}
     >
+      {/* NAVIGATION */}
       <nav
         style={{
           display: "flex",
@@ -88,6 +118,7 @@ export default function App() {
           >
             Clara Kang
           </span>
+
           <span style={{ fontSize: 12, color: "#777" }}>
             | Author & Researcher
           </span>
@@ -107,7 +138,8 @@ export default function App() {
               style={{
                 border: "none",
                 background: "transparent",
-                color: page === item.id ? "#214d3b" : "#555",
+                color:
+                  page === item.id ? "#214d3b" : "#555",
                 fontWeight:
                   page === item.id ? "bold" : "normal",
                 cursor: "pointer",
@@ -122,8 +154,13 @@ export default function App() {
         </div>
       </nav>
 
+      {/* BUTTERFLIES ON ALL SELECTED PAGES */}
+      <Butterflies page={butterflyPage} />
+
+      {/* HOME */}
       {page === "startseite" && <Home />}
 
+      {/* BOOKS */}
       {page === "buecher" && (
         <section
           style={{
@@ -207,6 +244,7 @@ export default function App() {
         </section>
       )}
 
+      {/* PROJECTS */}
       {page === "projekte" && (
         <section style={{ padding: "60px 32px" }}>
           <h1>Projekte</h1>
@@ -217,10 +255,13 @@ export default function App() {
         </section>
       )}
 
+      {/* RESEARCH */}
       {page === "forschung" && (
         <section style={{ padding: "60px 32px" }}>
           <h1>Forschung</h1>
-          <h2>KI-gestütztes Storytelling und Kinderliteratur</h2>
+          <h2>
+            KI-gestütztes Storytelling und Kinderliteratur
+          </h2>
           <p>
             Hier stelle ich meine Forschungsinteressen und
             mein geplantes Promotionsvorhaben vor.
@@ -228,6 +269,7 @@ export default function App() {
         </section>
       )}
 
+      {/* NEWS */}
       {page === "aktuelles" && (
         <section style={{ padding: "60px 32px" }}>
           <h1>Aktuelles</h1>
@@ -238,15 +280,20 @@ export default function App() {
         </section>
       )}
 
+      {/* ABOUT */}
       {page === "ueber-mich" && <About />}
 
+      {/* CONTACT */}
       {page === "kontakt" && <Contact />}
 
+      {/* MODAL */}
       <Modal
         item={selected}
         onClose={() => setSelected(null)}
       />
-      <Footer/>
+
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 }
