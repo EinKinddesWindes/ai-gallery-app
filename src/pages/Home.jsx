@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import Butterflies from "../components/Butterflies";
 import Footer from "../components/Footer";
 
@@ -25,6 +25,9 @@ export default function Home() {
 
   return (
     <main style={{ fontFamily: "Georgia, serif" }}>
+      <Butterflies />
+
+      {/* LANDING PAGE */}
       <section
         className="clara-landing"
         style={{
@@ -71,12 +74,16 @@ export default function Home() {
             </div>
           </div>
 
-         
+          {/* THREE VIDEOS */}
           <div className="clara-video-grid">
             {videos.map((item, index) => (
-              <div
+              <a
                 key={item.src}
                 className={`clara-video-item clara-video-${index + 1}`}
+                href={item.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${item.title} – Video ansehen`}
               >
                 <video
                   src={item.src}
@@ -86,28 +93,32 @@ export default function Home() {
                   playsInline
                   preload="metadata"
                 />
+
                 <span className="clara-video-title">
-                  {item.title}
+                  {item.title} ↗
                 </span>
-              </div>
+              </a>
             ))}
           </div>
-
         </div>
       </section>
 
+      {/* CREATIVE PORTFOLIO */}
       <section className="clara-feature">
         <div>
           <p className="clara-eyebrow">
             CREATIVE PORTFOLIO
           </p>
+
           <h2>Geschichten in Bildern</h2>
+
           <p>
             Jede Illustration erzählt ihre eigene
             Geschichte. Zwischen Fantasie, Literatur
             und digitaler Kunst entstehen neue
             Bilderwelten.
           </p>
+
           <a href="#/projekte">
             Bilderwelten entdecken →
           </a>
@@ -119,28 +130,32 @@ export default function Home() {
         />
       </section>
 
+      {/* RESEARCH */}
       <section className="clara-research">
         <p className="clara-eyebrow">
           LITERATURE · CREATIVITY · AI
         </p>
+
         <h2>Wenn Literatur auf KI trifft</h2>
+
         <p>
           Wie kann künstliche Intelligenz den
           kreativen Schreibprozess unterstützen,
           ohne die persönliche Stimme einer
           Autorin zu ersetzen?
         </p>
+
         <a href="#/forschung">
           Meine Forschungsinteressen →
         </a>
       </section>
 
+      {/* PAGE STYLES */}
       <style>{`
         .clara-landing {
           box-sizing: border-box;
         }
 
-        
         .clara-landing-grid {
           display: grid;
           grid-template-columns: 0.9fr 1.1fr;
@@ -150,15 +165,6 @@ export default function Home() {
           width: 100%;
           margin: auto;
         }
-        
-        .clara-landing-intro h1 {
-          font-size: clamp(36px, 4vw, 60px);
-          font-weight: 400;
-          line-height: 1.12;
-          color: #244b3c;
-          margin: 22px 0;
-        }
-
 
         .clara-eyebrow {
           font-family: Arial, sans-serif;
@@ -168,11 +174,11 @@ export default function Home() {
         }
 
         .clara-landing-intro h1 {
-          font-size: clamp(40px, 5vw, 72px);
+          font-size: clamp(36px, 4vw, 60px);
           font-weight: 400;
           line-height: 1.12;
           color: #244b3c;
-          margin: 25px 0;
+          margin: 22px 0;
         }
 
         .clara-subtitle {
@@ -212,7 +218,8 @@ export default function Home() {
           color: #244b3c;
         }
 
-                
+        /* VIDEO GRID */
+
         .clara-video-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -220,19 +227,22 @@ export default function Home() {
           width: 100%;
           align-items: stretch;
         }
-        
+
         .clara-video-item {
           position: relative;
+          display: block;
           overflow: hidden;
           background: #eaece6;
           aspect-ratio: 4 / 3;
+          text-decoration: none;
+          cursor: pointer;
         }
-        
+
         .clara-video-3 {
           grid-column: 1 / -1;
           aspect-ratio: 16 / 7;
         }
-        
+
         .clara-video-item video {
           display: block;
           width: 100%;
@@ -240,11 +250,11 @@ export default function Home() {
           object-fit: cover;
           transition: transform 0.6s ease;
         }
-        
+
         .clara-video-item:hover video {
           transform: scale(1.04);
         }
-        
+
         .clara-video-title {
           position: absolute;
           left: 14px;
@@ -255,83 +265,8 @@ export default function Home() {
           text-shadow: 0 1px 5px rgba(0,0,0,0.8);
           pointer-events: none;
         }
-        
-        @media (max-width: 600px) {
-          .clara-video-grid {
-            grid-template-columns: 1fr;
-          }
-        
-          .clara-video-3 {
-            grid-column: auto;
-          }
-        
-          .clara-video-item,
-          .clara-video-3 {
-            aspect-ratio: 16 / 10;
-          }
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-          .clara-video-item video {
-            transition: none;
-          }
-        }
 
-        .clara-art-item video {
-          width: 100%;
-          height: 100%;
-          display: block;
-          object-fit: cover;
-          transition: scale .5s ease;
-        }
-
-        .clara-art-item:hover video {
-          scale: 1.06;
-        }
-
-        .clara-video-label {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          padding: 24px 10px 12px;
-          background: linear-gradient(
-            transparent,
-            rgba(0,0,0,.55)
-          );
-          color: white;
-          font-family: Arial, sans-serif;
-          font-size: 12px;
-          text-align: center;
-          pointer-events: none;
-        }
-
-        .clara-float-1 {
-          animation: claraFloat1 7s ease-in-out infinite;
-        }
-
-        .clara-float-2 {
-          animation: claraFloat2 8.5s ease-in-out infinite;
-        }
-
-        .clara-float-3 {
-          animation: claraFloat3 9s ease-in-out infinite;
-        }
-
-        @keyframes claraFloat1 {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-12px); }
-        }
-
-        @keyframes claraFloat2 {
-          0%, 100% { transform: translateY(-24px); }
-          50% { transform: translateY(-42px); }
-        }
-
-        @keyframes claraFloat3 {
-          0%, 100% { transform: translateY(24px); }
-          50% { transform: translateY(7px); }
-        }
+        /* CREATIVE PORTFOLIO */
 
         .clara-feature {
           display: grid;
@@ -371,6 +306,8 @@ export default function Home() {
           font-family: Arial, sans-serif;
         }
 
+        /* RESEARCH */
+
         .clara-research {
           background: #eaece6;
           padding: 100px 25px;
@@ -382,6 +319,8 @@ export default function Home() {
           margin: 20px auto;
         }
 
+        /* TABLET */
+
         @media (max-width: 800px) {
           .clara-landing-grid,
           .clara-feature {
@@ -389,15 +328,11 @@ export default function Home() {
           }
 
           .clara-landing {
-            padding: 60px 6% !important;
+            padding: 35px 6% 65px !important;
           }
 
-          .clara-art-grid {
-            margin-top: 45px;
-          }
-
-          .clara-art-item {
-            height: 220px;
+          .clara-video-grid {
+            margin-top: 25px;
           }
 
           .clara-feature {
@@ -406,30 +341,31 @@ export default function Home() {
           }
         }
 
-        @media (max-width: 480px) {
-          .clara-art-item {
-            height: 160px;
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+          .clara-video-grid {
+            grid-template-columns: 1fr;
           }
 
-          .clara-video-label {
-            font-size: 10px;
+          .clara-video-3 {
+            grid-column: auto;
+          }
+
+          .clara-video-item,
+          .clara-video-3 {
+            aspect-ratio: 16 / 10;
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .clara-art-item {
-            animation: none;
-          }
-
-          .clara-art-item video {
+          .clara-video-item video {
             transition: none;
           }
         }
       `}</style>
-      <Footer/>
-    return (
-  <main style={{ fontFamily: "Georgia, serif" }}
-    <Butterflies />
-      >
+
+      <Footer />
+    </main>
   );
 }
