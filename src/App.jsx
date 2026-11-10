@@ -10,6 +10,8 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Butterflies from "./components/Butterflies";
 import Forschung from "./pages/Forschung";
+import Projekte from "./pages/Projekte";
+
 
 const BOOKS = [
   "Alle",
@@ -246,15 +248,7 @@ export default function App() {
       )}
 
       {/* PROJECTS */}
-      {page === "projekte" && (
-        <section style={{ padding: "60px 32px" }}>
-          <h1>Projekte</h1>
-          <p>
-            Hier stelle ich meine kreativen und digitalen
-            Projekte vor.
-          </p>
-        </section>
-      )}
+      {page === "projekte" && <Projekte />}
 
       {/* RESEARCH */}
      
