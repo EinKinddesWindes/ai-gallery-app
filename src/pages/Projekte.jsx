@@ -1,12 +1,6 @@
 
 import React from "react";
-
-const BASE = import.meta.env.BASE_URL;
-
-
-import React from "react";
 import { projects } from "../data/projects";
-
 
 export default function Projekte() {
   return (
