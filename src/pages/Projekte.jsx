@@ -1,9 +1,114 @@
 
-import React from "react";
+import React, { useState} from "react";
 import { projects } from "../data/projects";
 
+
 export default function Projekte() {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  if (selectedProject) {
+    return (
+      <main
+        style={{
+          background: "#f7f5f0",
+          color: "#244b3c",
+          minHeight: "70vh",
+          fontFamily: "Georgia, serif",
+        }}
+      >
+        <article
+          style={{
+            maxWidth: 1000,
+            margin: "0 auto",
+            padding: "65px 7% 90px",
+          }}
+        >
+          <button
+            onClick={() => {
+              setSelectedProject(null);
+              window.scrollTo(0, 0);
+            }}
+            style={{
+              background: "transparent",
+              border: "none",
+              padding: "0 0 35px",
+              color: "#244b3c",
+              cursor: "pointer",
+              fontSize: 15,
+            }}
+          >
+            ← Zurück zu Projekte
+          </button>
+
+          <p
+            style={{
+              fontFamily: "Arial, sans-serif",
+              fontSize: 12,
+              letterSpacing: 3,
+              color: "#827d72",
+            }}
+          >
+            {selectedProject.technique}
+          </p>
+
+          <h1
+            style={{
+              fontSize: "clamp(40px, 6vw, 65px)",
+              fontWeight: 400,
+              margin: "20px 0",
+            }}
+          >
+            {selectedProject.title}
+          </h1>
+
+          <h2
+            style={{
+              fontSize: "clamp(23px, 3vw, 32px)",
+              fontWeight: 400,
+              marginBottom: 35,
+            }}
+          >
+            {selectedProject.subtitle}
+          </h2>
+
+          <img
+            src={selectedProject.image}
+            alt={`Illustration aus ${selectedProject.title}`}
+            style={{
+              display: "block",
+              width: "100%",
+              maxHeight: 550,
+              objectFit: "contain",
+              marginBottom: 45,
+            }}
+          />
+
+          <h2
+            style={{
+              fontSize: 30,
+              fontWeight: 400,
+            }}
+          >
+            Über das Projekt
+          </h2>
+
+          <p
+            style={{
+              fontSize: 18,
+              lineHeight: 1.9,
+              color: "#666",
+              maxWidth: 800,
+            }}
+          >
+            {selectedProject.description}
+          </p>
+        </article>
+      </main>
+    );
+  }
+
   return (
+
     <main
       style={{
         background: "#f7f5f0",
@@ -82,9 +187,21 @@ export default function Projekte() {
           }}
         >
           {projects.map((project) => (
-            <article
-              key={project.id}
-              style={{
+            
+              
+          <article
+            key={project.id}
+            onClick={() => {
+              setSelectedProject(project);
+              window.scrollTo(0, 0);
+            }}
+            style={{
+              background: "#eaece6",
+              overflow: "hidden",
+              cursor: "pointer",
+            }}
+          >
+
                 background: "#eaece6",
                 overflow: "hidden",
               }}
