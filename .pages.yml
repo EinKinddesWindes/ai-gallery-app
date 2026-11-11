@@ -2,7 +2,7 @@
   input: public/uploads
   output: /ai-gallery-app/uploads
 
-content:
+ content:
   - name: projekte
     label: Projekte
     type: collection
