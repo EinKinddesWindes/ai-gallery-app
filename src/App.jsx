@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import Butterflies from "./components/Butterflies";
 import Forschung from "./pages/Forschung";
 import Projekte from "./pages/Projekte";
+import Aktuelles from "./pages/Aktuelles";
 
 
 const BOOKS = [
@@ -255,15 +256,7 @@ export default function App() {
 {page === "forschung" && <Forschung />}
 
       {/* NEWS */}
-      {page === "aktuelles" && (
-        <section style={{ padding: "60px 32px" }}>
-          <h1>Aktuelles</h1>
-          <p>
-            Neuigkeiten zu Büchern, Projekten und
-            Veranstaltungen.
-          </p>
-        </section>
-      )}
+{page === "aktuelles" && <Aktuelles />}
 
       {/* ABOUT */}
       {page === "ueber-mich" && <About />}
