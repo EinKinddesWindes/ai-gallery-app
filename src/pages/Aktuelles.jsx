@@ -6,7 +6,7 @@ const BASE = import.meta.env.BASE_URL;
 
 const posts = cmsPosts
   .filter((post) => post.category === "aktuelles")
-  .sort((a, b) => b.date.localeCompare(a.date));
+  .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
 function formatDate(date) {
   if (!date) return "";
@@ -26,7 +26,6 @@ function imagePath(image) {
   if (!image) return "";
 
   if (/^https?:\/\//.test(image)) return image;
-
   if (image.startsWith(BASE)) return image;
 
   return `${BASE}${image.replace(/^\/+/, "")}`;
@@ -41,6 +40,11 @@ export default function Aktuelles() {
     posts.find((post) => post.id === selectedId) ||
     posts[0];
 
+  function selectPost(id) {
+    setSelectedId(id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <main
       style={{
@@ -50,111 +54,163 @@ export default function Aktuelles() {
         fontFamily: "Georgia, serif",
       }}
     >
-      <section
+      <div
         style={{
-          maxWidth: 1200,
+          maxWidth: 1000,
           margin: "0 auto",
-          padding: "65px 7% 90px",
+          padding: "55px 7% 90px",
         }}
       >
-        <p
+        {/* SELECTED ARTICLE */}
+        <article
           style={{
-            fontFamily: "Arial, sans-serif",
-            fontSize: 12,
-            letterSpacing: 3,
-            color: "#827d72",
+            maxWidth: 800,
+            margin: "0 auto 80px",
+            minHeight: 200,
+            overflowWrap: "anywhere",
           }}
         >
-          NEUIGKEITEN · VERANSTALTUNGEN · EINBLICKE
-        </p>
-
-        <h1
-          style={{
-            fontSize: "clamp(42px, 6vw, 72px)",
-            fontWeight: 400,
-            margin: "25px 0",
-          }}
-        >
-          Aktuelles
-        </h1>
-
-        <p
-          style={{
-            fontSize: 17,
-            lineHeight: 1.9,
-            color: "#666",
-            maxWidth: 780,
-            marginBottom: 50,
-          }}
-        >
-          Neuigkeiten zu meinen Büchern, kreativen
-          Projekten, Forschungsaktivitäten und
-          Veranstaltungen.
-        </p>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
-            gap: 35,
-            alignItems: "start",
-          }}
-        >
-          {/* LEFT: ARTICLE LIST */}
-          <aside
-            style={{
-              borderTop: "1px solid #d7dbd1",
-            }}
-          >
-            <h2
-              style={{
-                fontSize: 23,
-                fontWeight: 400,
-                padding: "20px 0",
-                margin: 0,
-              }}
-            >
-              Beiträge
-            </h2>
-
-            {posts.length === 0 ? (
+          {selected ? (
+            <>
               <p
                 style={{
-                  color: "#777",
-                  lineHeight: 1.8,
+                  fontFamily: "Arial, sans-serif",
+                  fontSize: 12,
+                  letterSpacing: 1.5,
+                  color: "#827d72",
+                  marginBottom: 20,
                 }}
               >
-                Noch keine Beiträge vorhanden.
+                {formatDate(selected.date)}
               </p>
-            ) : (
-              posts.map((post) => (
-                <button
-                  key={post.id}
-                  onClick={() => setSelectedId(post.id)}
+
+              <h1
+                style={{
+                  fontSize: "clamp(30px, 4vw, 48px)",
+                  fontWeight: 400,
+                  lineHeight: 1.3,
+                  margin: "0 0 30px",
+                }}
+              >
+                {selected.title}
+              </h1>
+
+              {selected.description && (
+                <p
+                  style={{
+                    fontSize: 19,
+                    lineHeight: 1.8,
+                    color: "#666",
+                    marginBottom: 30,
+                  }}
+                >
+                  {selected.description}
+                </p>
+              )}
+
+              {selected.image && (
+                <img
+                  src={imagePath(selected.image)}
+                  alt={selected.title}
                   style={{
                     display: "block",
                     width: "100%",
-                    textAlign: "left",
-                    padding: "20px 16px",
-                    border: "none",
-                    borderBottom: "1px solid #d7dbd1",
-                    background:
-                      selected?.id === post.id
-                        ? "#eaece6"
-                        : "transparent",
-                    cursor: "pointer",
-                    color: "#244b3c",
-                    fontFamily: "Georgia, serif",
+                    maxHeight: 520,
+                    objectFit: "contain",
+                    margin: "30px 0",
                   }}
-                >
+                />
+              )}
+
+              <div
+                style={{
+                  fontSize: 17,
+                  lineHeight: 1.9,
+                  color: "#555",
+                  whiteSpace: "pre-wrap",
+                }}
+              >
+                {selected.body}
+              </div>
+            </>
+          ) : (
+            <div
+              style={{
+                textAlign: "center",
+                padding: "75px 0",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: 20,
+                  color: "#827d72",
+                  fontWeight: 400,
+                }}
+              >
+                Hier erscheinen künftig meine
+                neuesten Beiträge.
+              </p>
+            </div>
+          )}
+        </article>
+
+        {/* ARTICLE ARCHIVE */}
+        <section
+          style={{
+            maxWidth: 800,
+            margin: "0 auto",
+            borderTop: "1px solid #d7dbd1",
+            paddingTop: 35,
+          }}
+        >
+          <h2
+            style={{
+              fontSize: 28,
+              fontWeight: 400,
+              margin: "0 0 30px",
+            }}
+          >
+            Weitere Beiträge
+          </h2>
+
+          {posts.length === 0 ? (
+            <p
+              style={{
+                fontSize: 15,
+                color: "#827d72",
+              }}
+            >
+              Noch keine Beiträge vorhanden.
+            </p>
+          ) : (
+            posts.map((post) => (
+              <button
+                key={post.id}
+                onClick={() => selectPost(post.id)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: 20,
+                  width: "100%",
+                  padding: "22px 0",
+                  border: "none",
+                  borderBottom: "1px solid #d7dbd1",
+                  background: "transparent",
+                  color: "#244b3c",
+                  textAlign: "left",
+                  cursor: "pointer",
+                  fontFamily: "Georgia, serif",
+                }}
+              >
+                <span>
                   <span
                     style={{
                       display: "block",
                       fontFamily: "Arial, sans-serif",
                       fontSize: 12,
                       color: "#827d72",
-                      marginBottom: 9,
+                      marginBottom: 10,
                     }}
                   >
                     {formatDate(post.date)}
@@ -162,101 +218,29 @@ export default function Aktuelles() {
 
                   <span
                     style={{
-                      fontSize: 19,
+                      display: "block",
+                      fontSize: 20,
                       lineHeight: 1.5,
                     }}
                   >
                     {post.title}
                   </span>
-                </button>
-              ))
-            )}
-          </aside>
+                </span>
 
-          {/* RIGHT: SELECTED ARTICLE */}
-          <article
-            style={{
-              borderTop: "1px solid #d7dbd1",
-              paddingTop: 22,
-              minHeight: 300,
-              overflowWrap: "anywhere",
-            }}
-          >
-            {selected ? (
-              <>
-                <p
+                <span
+                  aria-hidden="true"
                   style={{
-                    fontFamily: "Arial, sans-serif",
-                    fontSize: 12,
-                    letterSpacing: 1,
-                    color: "#827d72",
+                    fontSize: 22,
+                    flexShrink: 0,
                   }}
                 >
-                  {formatDate(selected.date)}
-                </p>
-
-                <h2
-                  style={{
-                    fontSize: "clamp(28px, 3vw, 40px)",
-                    fontWeight: 400,
-                    lineHeight: 1.3,
-                    margin: "18px 0 25px",
-                  }}
-                >
-                  {selected.title}
-                </h2>
-
-                {selected.description && (
-                  <p
-                    style={{
-                      fontSize: 18,
-                      lineHeight: 1.8,
-                      color: "#666",
-                    }}
-                  >
-                    {selected.description}
-                  </p>
-                )}
-
-                {selected.image && (
-                  <img
-                    src={imagePath(selected.image)}
-                    alt={selected.title}
-                    style={{
-                      display: "block",
-                      width: "100%",
-                      maxHeight: 450,
-                      objectFit: "contain",
-                      margin: "30px 0",
-                    }}
-                  />
-                )}
-
-                <div
-                  style={{
-                    fontSize: 17,
-                    lineHeight: 1.9,
-                    color: "#555",
-                    whiteSpace: "pre-wrap",
-                  }}
-                >
-                  {selected.body}
-                </div>
-              </>
-            ) : (
-              <p
-                style={{
-                  color: "#777",
-                  lineHeight: 1.8,
-                }}
-              >
-                Hier erscheinen künftig meine
-                neuesten Beiträge.
-              </p>
-            )}
-          </article>
-        </div>
-      </section>
+                  ↗
+                </span>
+              </button>
+            ))
+          )}
+        </section>
+      </div>
     </main>
   );
 }
