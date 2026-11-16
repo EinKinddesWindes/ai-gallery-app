@@ -1,5 +1,8 @@
 
 import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { isAdmin } from "./admin";
 import { images } from "./data/images";
 
 import Home from "./pages/Home";
@@ -12,7 +15,7 @@ import Butterflies from "./components/Butterflies";
 import Forschung from "./pages/Forschung";
 import Projekte from "./pages/Projekte";
 import Aktuelles from "./pages/Aktuelles";
-
+import AdminLogin from "./components/AdminLogin";
 
 const BOOKS = [
   "Alle",
@@ -51,6 +54,15 @@ const BUTTERFLY_PAGES = {
 };
 
 export default function App() {
+    const [admin, setAdmin] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setAdmin(isAdmin(user));
+    });
+
+    return unsubscribe;
+  }, []);
   const [page, setPage] = useState(getPage);
   const [filter, setFilter] = useState("Alle");
   const [query, setQuery] = useState("");
@@ -155,6 +167,9 @@ export default function App() {
               {item.label}
             </button>
           ))}
+
+        <AdminLogin />
+
         </div>
       </nav>
 
@@ -248,16 +263,11 @@ export default function App() {
         </section>
       )}
 
-      {/* PROJECTS */}
-      {page === "projekte" && <Projekte />}
+      {page === "projekte" && <Projekte admin={admin} />}
 
-      {/* RESEARCH */}
-     
-{page === "forschung" && <Forschung />}
+      {page === "forschung" && <Forschung admin={admin} />}
 
-      {/* NEWS */}
-{page === "aktuelles" && <Aktuelles />}
-
+      {page === "aktuelles" && <Aktuelles admin={admin} />}
       {/* ABOUT */}
       {page === "ueber-mich" && <About />}
 
