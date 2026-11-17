@@ -46,20 +46,19 @@ export default function Gallery({ items, filter, query, onSelect }) {
         @media (max-width: 900px) {
           .gallery-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
+            gap: 20px;
             padding: 0 20px;
           }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
           .gallery-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-            padding: 0 12px;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 28px;
+            padding: 0 24px;
           }
         }
       `}</style>
     </div>
   );
 }
-
