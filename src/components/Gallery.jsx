@@ -1,3 +1,4 @@
+
 import { useMemo } from "react";
 import ImageCard from "./ImageCard";
 
@@ -15,21 +16,13 @@ export default function Gallery({ items, filter, query, onSelect }) {
 
   return (
     <div>
-      
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-        gap: 24,
-        maxWidth: 1200,
-        margin: "0 auto",
-        padding: "0 32px",
-        boxSizing: "border-box",
-      }}
-    >
-
+      <div className="gallery-grid">
         {filtered.map((item) => (
-          <ImageCard key={item.id} item={item} onClick={() => onSelect(item)} />
+          <ImageCard
+            key={item.id}
+            item={item}
+            onClick={() => onSelect(item)}
+          />
         ))}
       </div>
 
@@ -38,6 +31,35 @@ export default function Gallery({ items, filter, query, onSelect }) {
           Keine Ergebnisse. Versuche einen anderen Suchbegriff.
         </div>
       )}
+
+      <style>{`
+        .gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 24px;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 32px;
+          box-sizing: border-box;
+        }
+
+        @media (max-width: 900px) {
+          .gallery-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            padding: 0 20px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .gallery-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            padding: 0 12px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
+
